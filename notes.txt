@@ -1,0 +1,3 @@
+- color (primary, secondary, text, dll) di jelasin za warna nya
+- padding, margin & sizing yang lain
+- components (button, input, dll)

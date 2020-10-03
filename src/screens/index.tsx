@@ -25,7 +25,7 @@ const Paths = () => <>
 		const paths = ["about", "collections"]
 		const { match: { params: { product } } } = props
 		return <>
-			<div className="flex">
+			<div style={{ margin: '0 -.25rem' }} className="flex">
 				<div className="p-1">Home</div>
 				<div className="p-1">/</div>
 				<div className="p-1">{product}</div>
