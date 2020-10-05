@@ -1,0 +1,13 @@
+#header {
+	padding: $base $pw2 $pw2;
+	#menu {
+		.button {
+			padding: 20px;
+			color: $dark !important;
+			&.active {
+				font-family: Bold;
+				// font-size: $fontSize + 2;
+			}
+		}
+	}
+}

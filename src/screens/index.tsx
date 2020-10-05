@@ -1,21 +1,25 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import Header from 'src/components/commons/Header';
+import Footer from 'src/components/commons/Footer';
 import Home from './Home';
-import About from './About';
+import { screenProps } from 'src/utils/constants/type';
 import Collections from './Collections';
-import Header from '../components/commons/Header';
-import Footer from '../components/commons/Footer';
-import { screenProps } from '../utils/constants/type';
+import About from './About';
+import Container from 'src/components/elements/Container';
+import View from 'src/components/elements/View';
 
 const App = () => {
-	return <div className="p-10">
+	return <Container id="app" style={{ background: `url('${require('../assets/images/Sky-BG.jpg')}')` }}>
 		<Header />
-		<Switch>
-			<Route path="/" exact component={Home} />
-			<Paths />
-		</Switch>
-		<Footer />
-	</div>
+		<View id="scroll">
+			<Switch>
+				<Route path="/" exact component={Home} />
+				<Paths />
+			</Switch>
+			<Footer />
+		</View>
+	</Container>
 }
 
 export default App

@@ -1,0 +1,29 @@
+#footer {
+	background: $light;
+	margin: 0 -$base;
+	.description {
+		padding: $pw2 $pw2;
+		> .view {
+			padding: $base;
+			line-height: $base * 1.25;
+			.title {
+				color: $blueSky !important;
+				margin-bottom: $base;
+			}
+			.icon-wrapper {
+				margin-top: $base;
+				i {
+					font-size: $base * 1.5;
+					margin-right: $base;
+				}
+			}
+		}
+	}
+	.copyright {
+		padding: $secondary 0;
+		background: $blueSky;
+		i {
+			margin-right: $space;
+		}
+	}
+}
