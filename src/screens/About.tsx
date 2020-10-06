@@ -8,15 +8,15 @@ import Wrapper from 'src/components/elements/Wrapper';
 import { Space } from 'src/components/elements/Divider';
 
 const About = () => {
-	return <Container>
+	return <Container id="about">
 		<Text>About Us</Text>
-		<Wrapper>
+		<Wrapper items="start">
 			<View>
 				<Image source={require('../assets/images/Img-2.jpg')} />
 			</View>
 			<View>
 				<Text>Respirar Breathe</Text>
-				<Wrapper>
+				<Wrapper items="start">
 					<Text>Minim consequat proident laborum sit laborum elit aute qui irure consequat in pariatur aute elit. In sunt aute sit ad dolore minim magna. Anim sit nulla mollit enim nostrud culpa deserunt consectetur anim nulla reprehenderit anim magna. Elit deserunt dolor voluptate id consectetur aliqua fugiat reprehenderit duis sint. Do enim eiusmod exercitation aute.</Text>
 					<View>
 						<Text><Icon name="home" />Our Store</Text>
