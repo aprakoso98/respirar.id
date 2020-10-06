@@ -1,12 +1,19 @@
 import React from 'react';
-import { ViewProps } from './View';
+import View, { ViewProps } from './View';
 
 interface Props extends ViewProps {
-	children: string
+	children: React.ReactNode | string
 }
 
-const Text = ({ className = "", children, ...rest }: Props) => {
-	return <div className={`text ${className}`} {...rest}>{children}</div>
+const Text = ({ children, ...props }: Props) => {
+	return <View direction="row" children={
+		Array.isArray(children) ?
+			children.rMap(
+				(c: React.ReactElement | string) => typeof c === 'string' ?
+					<Text {...props}>{c}</Text> :
+					React.cloneElement(c, props)
+			) : children
+	} {...props} />
 }
 
 export default Text

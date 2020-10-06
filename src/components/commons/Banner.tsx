@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
-import ReactElasticCarousel, { ReactElasticCarouselProps } from 'react-elastic-carousel';
+import React from 'react';
+import ReactElasticCarousel from 'react-elastic-carousel';
 import Button from '../elements/Button';
 import Icon from '../elements/Icon';
 import Image from '../elements/Image';
 import View from '../elements/View';
 
-let carouselRef: ReactElasticCarouselProps, length = 3, autoPlaySpeed = 3000
+let autoPlaySpeed = 3000
 
 const Banner = () => {
 	return <View id="banner">
@@ -14,13 +14,6 @@ const Banner = () => {
 			pagination={false}
 			autoPlaySpeed={autoPlaySpeed}
 			className="relative"
-			onNextEnd={({ index }) => {
-				if (index === length) {
-					setTimeout(() => {
-						// carouselRef.
-					}, autoPlaySpeed)
-				}
-			}}
 			renderArrow={({ type, onClick }) => {
 				const style = {
 					...type === 'NEXT' ? { right: 25 } : { left: 25 },

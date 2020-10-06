@@ -8,37 +8,45 @@ import Collections from './Collections';
 import About from './About';
 import Container from 'src/components/elements/Container';
 import View from 'src/components/elements/View';
+import Product from './Product';
+import Wrapper from 'src/components/elements/Wrapper';
+import Text from 'src/components/elements/Text';
+import Button from 'src/components/elements/Button';
 
 const App = () => {
 	return <Container id="app" style={{ background: `url('${require('../assets/images/Sky-BG.jpg')}')` }}>
 		<Header />
 		<View id="scroll">
 			<Switch>
+				<RouteProduct />
 				<Route path="/" exact component={Home} />
-				<Paths />
 			</Switch>
 			<Footer />
 		</View>
 	</Container>
 }
 
-export default App
+const RouteProduct = () => {
+	return <>
+		<Route path="/:product" render={(props: screenProps) => {
+			const paths = ["about", "collections"]
+			const { match: { params: { product } } } = props
+			return <View id="jsdhfkjhsdjfhkjshdjdshf">
+				<Wrapper justify="start">
+					<Button>Home</Button>
+					<Text>/</Text>
+					{!paths.includes(product) && <>
+						<Button>Collections</Button>
+						<Text>/</Text>
+					</>}
+					<Text>{product}</Text>
+				</Wrapper>
+				{!paths.includes(product) && <Product {...props} />}
+			</View>
+		}} />
+		<Route path="/about" exact component={About} />
+		<Route path="/collections" exact component={Collections} />
+	</>
+}
 
-const Paths = () => <>
-	<Route path="/:product" render={(props: screenProps) => {
-		const paths = ["about", "collections"]
-		const { match: { params: { product } } } = props
-		return <>
-			<div style={{ margin: '0 -.25rem' }} className="flex">
-				<div className="p-1">Home</div>
-				<div className="p-1">/</div>
-				<div className="p-1">{product}</div>
-			</div>
-			{
-				!paths.includes(product) && <div>kkdhksjdf</div>
-			}
-		</>
-	}} />
-	<Route path="/collections" exact component={Collections} />
-	<Route path="/about" exact component={About} />
-</>
+export default App
