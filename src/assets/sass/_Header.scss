@@ -1,12 +1,9 @@
 #header {
-	padding: $base $pw2;
 	#menu {
+		padding: 10px 15px !important;
 		.button {
-			padding: 20px;
-			color: $dark !important;
 			&.active {
 				font-family: Bold;
-				// font-size: $fontSize + 2;
 			}
 		}
 	}

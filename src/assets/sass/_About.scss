@@ -1,3 +1,11 @@
 #about {
-	padding: 0 $pw2;
+	> .view {
+		&:nth-child(odd):not(.text) {
+			background: $grey;
+		}
+		.card-excellence {
+			box-shadow: 1px 1px $secondary lighten($greyHard, 20);
+			border-radius: $secondary;
+		}
+	}
 }

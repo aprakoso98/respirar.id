@@ -8,3 +8,11 @@
     @return $string;
   }
 }
+
+@function inline-if($condition, $then, $else) {
+  @if $condition { 
+    @return $then;
+  } @else {
+    @return $else;
+  }
+}

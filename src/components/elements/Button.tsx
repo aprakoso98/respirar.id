@@ -7,7 +7,9 @@ interface ButtonProps extends ViewProps {
 }
 
 const Button = ({ children, justify, className = "", ...rest }: ButtonProps) => {
-	return <Wrapper justify={justify ? justify : typeof children === 'string' ? 'center' : 'between'} className={`button pointer ${className}`} {...rest}>
+	return <Wrapper
+		justify={justify ? justify : typeof children === 'string' ? 'center' : 'between'}
+		className={`button ph-5 pv-2 pointer ${className}`} {...rest}>
 		{children}
 	</Wrapper>
 }

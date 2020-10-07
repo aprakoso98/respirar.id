@@ -1,10 +1,60 @@
+.pointer {
+	cursor: pointer;
+}
+.button {
+  background: $light;
+	padding: $secondary $base;
+	&.link {
+		padding: 0;
+		background: transparent;
+		justify-content: flex-start;
+	}
+}
+.title {
+  color: $blue !important;
+  font-size: $base * 2 !important;
+  font-family: Display-Medium !important;
+  margin-bottom: $base;
+}
+.selection {
+  -webkit-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+}
+.icon {
+	&.li-item {
+    margin-right: $secondary;
+    font-size: $space !important;
+	}
+}
+.no {
+  &-margin {
+    margin: {
+      top: 0 !important;
+      left: 0 !important;
+      bottom: 0 !important;
+      right: 0 !important;
+    }
+  }
+  &-padding {
+    padding: {
+      top: 0 !important;
+      left: 0 !important;
+      bottom: 0 !important;
+      right: 0 !important;
+    }
+  }
+}
+.rec-slider-container {
+  margin: 0 !important;
+}
 @each $list in $colorList {
   $class: nth($list, 1);
   $color: nth($list, 2);
-  .background-#{$class} {
+  .background-#{$class}, .bg-#{$class} {
     background: $color !important;
   }
-  .color-#{$class} {
+  .color-#{$class}, .c-#{$class} {
     color: $color !important;
   }
 }
@@ -26,3 +76,53 @@
     font-family: #{$family} !important;
   }
 }
+
+@mixin myMixin ($w, $s){
+  $o: 0;
+  @for $i from 0 to 30 {
+    $o: if($i==0, 0, if($w > 0, $o + 5, $o - 5));
+    .#{$s}f-#{$i} {
+      font-size: #{$i + $fontSize} !important;
+    }
+    @each $var in (('m', margin), ('p', padding)) {
+      $selector: nth($var, 1);
+      $style: nth($var, 2);
+      .#{$s}#{$selector} {
+        &-#{$i} {
+          #{$style}: #{$o}px;
+        }
+        &h-#{$i} {
+          #{$style}: {
+            left: #{$o}px;
+            right: #{$o}px;
+          }
+        }
+        &v-#{$i} {
+          #{$style}: {
+            top: #{$o}px;
+            bottom: #{$o}px;
+          }
+        }
+        @each $position in (('t', top), ('r', right), ('b', bottom), ('l', left)) {
+          $selectorP: nth($position, 1);
+          $styleP: nth($position, 2);
+          &#{$selectorP}-#{$i} {
+            #{$style}: {
+              #{$styleP}: #{$o}px;
+            }
+          }
+        }
+      }
+    }
+    @each $position in (('t', top), ('r', right), ('b', bottom), ('l', left)) {
+      $selectorP: nth($position, 1);
+      $styleP: nth($position, 2);
+      .#{$s}#{$selectorP}-#{$i} {
+        #{$styleP}: #{$o}px;
+      }
+    }
+  }
+}
+
+@include myMixin(1, "");
+@include myMixin(-1, "-");

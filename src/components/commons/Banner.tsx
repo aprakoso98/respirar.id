@@ -8,7 +8,7 @@ import View from '../elements/View';
 let autoPlaySpeed = 3000
 
 const Banner = () => {
-	return <View id="banner">
+	return <View className="pb-10 ph-15" id="banner">
 		<ReactElasticCarousel
 			enableAutoPlay
 			pagination={false}

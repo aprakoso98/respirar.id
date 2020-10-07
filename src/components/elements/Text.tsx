@@ -1,17 +1,19 @@
 import React from 'react';
-import View, { ViewProps } from './View';
+import { ViewProps } from './View';
+import Wrapper from './Wrapper';
 
 interface Props extends ViewProps {
 	children: React.ReactNode | string
+	unsetPropsOnChildren?: boolean
 }
 
-const Text = ({ children, ...props }: Props) => {
-	return <View direction="row" children={
+const Text = ({ className = "", unsetPropsOnChildren, children, ...props }: Props) => {
+	return <Wrapper className={`text ${className}`} justify="start" children={
 		Array.isArray(children) ?
 			children.rMap(
 				(c: React.ReactElement | string) => typeof c === 'string' ?
-					<Text {...props}>{c}</Text> :
-					React.cloneElement(c, props)
+					<Text {...unsetPropsOnChildren ? {} : props}>{c}</Text> :
+					unsetPropsOnChildren ? c : React.cloneElement(c, props)
 			) : children
 	} {...props} />
 }

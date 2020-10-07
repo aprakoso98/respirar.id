@@ -3,19 +3,17 @@
 @import "global";
 
 #root {
-	padding: 0 $pw;
 	* {
-		color: $text;
-		font-size: $fontSize;
 		-webkit-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
+		color: $text;
+		font-size: $fontSize;
 		&:not(.fa):not(.far):not(.fas){
 			font-family: Regular;
 		}
 	}
 	#app {
-		padding: $ph 0 0;
 		background: $light;
 		@import "Header";
 		@import "Home";
@@ -24,24 +22,4 @@
 		@import "Product";
 		@import "Footer";
 	}
-}
-
-.pointer {
-	cursor: pointer;
-}
-
-.button {
-  background: $light;
-	padding: $secondary $base;
-	&.link {
-		padding: 0;
-		background: transparent;
-		justify-content: flex-start;
-	}
-}
-
-.selection {
-  -webkit-user-select: all;
-  -ms-user-select: all;
-  user-select: all;
 }

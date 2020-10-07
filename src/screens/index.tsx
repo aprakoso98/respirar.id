@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Header from 'src/components/commons/Header';
 import Footer from 'src/components/commons/Footer';
 import Home from './Home';
@@ -12,14 +12,18 @@ import Product from './Product';
 import Wrapper from 'src/components/elements/Wrapper';
 import Text from 'src/components/elements/Text';
 import Button from 'src/components/elements/Button';
+import { Divider } from 'src/components/elements/Divider';
 
 const App = () => {
-	return <Container id="app" style={{ background: `url('${require('../assets/images/Sky-BG.jpg')}')` }}>
+	const [isHome, setIsHome] = useState(window.location.pathname === '/')
+	const history = useHistory()
+	// @ts-ignore
+	history.listen(({ pathname }) => setIsHome(pathname === '/'))
+	return <Container id="app" style={isHome ? { background: `url('${require('../assets/images/Sky-BG.jpg')}')` } : {}}>
 		<Header />
 		<View id="scroll">
 			<Switch>
 				<RouteProduct />
-				<Route path="/" exact component={Home} />
 			</Switch>
 			<Footer />
 		</View>
@@ -27,25 +31,28 @@ const App = () => {
 }
 
 const RouteProduct = () => {
+	const history = useHistory()
 	return <>
 		<Route path="/:product" render={(props: screenProps) => {
 			const paths = ["about", "collections"]
 			const { match: { params: { product } } } = props
-			return <View id="jsdhfkjhsdjfhkjshdjdshf">
-				<Wrapper justify="start">
-					<Button>Home</Button>
-					<Text>/</Text>
+			return <View>
+				<Divider />
+				<Wrapper className={`ph-15 pt-5 ${paths.includes(product) ? 'mb-3' : ''}`} justify="start">
+					<Button onClick={() => history.push('/')} className="f-5 link">Home</Button>
+					<Text className="f-5 ph-2">/</Text>
 					{!paths.includes(product) && <>
-						<Button>Collections</Button>
-						<Text>/</Text>
+						<Button onClick={() => history.push('/collections')} className="f-5 link">Collections</Button>
+						<Text className="f-5 ph-2">/</Text>
 					</>}
-					<Text>{product}</Text>
+					<Text className="f-5">{product}</Text>
 				</Wrapper>
 				{!paths.includes(product) && <Product {...props} />}
 			</View>
 		}} />
 		<Route path="/about" exact component={About} />
 		<Route path="/collections" exact component={Collections} />
+		<Route path="/" exact component={Home} />
 	</>
 }
 
