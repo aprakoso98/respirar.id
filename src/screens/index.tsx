@@ -13,12 +13,14 @@ import Wrapper from 'src/components/elements/Wrapper';
 import Text from 'src/components/elements/Text';
 import Button from 'src/components/elements/Button';
 import { Divider } from 'src/components/elements/Divider';
+import useWindowSize from 'src/hooks/useWindowSize';
 
 const App = () => {
 	const [isHome, setIsHome] = useState(window.location.pathname === '/')
 	const history = useHistory()
 	// @ts-ignore
 	history.listen(({ pathname }) => setIsHome(pathname === '/'))
+	// return <Container id="app" className="bg-blue">
 	return <Container id="app" style={isHome ? { background: `url('${require('../assets/images/Sky-BG.jpg')}')` } : {}}>
 		<Header />
 		<View id="scroll">
@@ -32,13 +34,14 @@ const App = () => {
 
 const RouteProduct = () => {
 	const history = useHistory()
+	const [, , isMobile] = useWindowSize()
 	return <>
 		<Route path="/:product" render={(props: screenProps) => {
 			const paths = ["about", "collections"]
 			const { match: { params: { product } } } = props
 			return <View>
 				<Divider />
-				<Wrapper className={`ph-15 pt-5 ${paths.includes(product) ? 'mb-3' : ''}`} justify="start">
+				<Wrapper wrap className={`pt-5 ${isMobile ? 'ph-5' : 'ph-15'} ${paths.includes(product) ? 'mb-3' : ''}`} justify="start">
 					<Button onClick={() => history.push('/')} className="f-5 link">Home</Button>
 					<Text className="f-5 ph-2">/</Text>
 					{!paths.includes(product) && <>

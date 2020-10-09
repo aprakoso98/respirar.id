@@ -3,7 +3,7 @@
 }
 .button {
   background: $light;
-	padding: $secondary $base;
+	// padding: $secondary $base;
 	&.link {
 		padding: 0;
 		background: transparent;
@@ -14,18 +14,49 @@
   color: $blue !important;
   font-size: $base * 2 !important;
   font-family: Display-Medium !important;
-  margin-bottom: $base;
+  margin-bottom: $secondary;    
+  @media only screen and (min-width: 720px) {
+    margin-bottom: $base;
+  }
+}
+
+[component-id] {
+  @include append-attr('icon') {
+    &.li-item {
+      margin: {
+        right: $secondary;
+        top: $space;
+      }
+      font-size: $space !important;
+      display: flex;
+      align-self: flex-start;
+    }
+  }
+  @include append-attr('input') {
+    transition: $transition;
+    // padding: $secondary;
+    overflow: hidden;
+    border: 1px solid $greyHard;
+    border-radius: $space;
+    &.no-border {
+      border: none;
+    }
+    input {
+      transition: $transition;
+      outline: none;
+    }
+  }
+}
+.o-h {
+  overflow: hidden;
+}
+.animated {
+  transition: $transition;
 }
 .selection {
   -webkit-user-select: all;
   -ms-user-select: all;
   user-select: all;
-}
-.icon {
-	&.li-item {
-    margin-right: $secondary;
-    font-size: $space !important;
-	}
 }
 .no {
   &-margin {

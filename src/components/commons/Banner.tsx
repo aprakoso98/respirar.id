@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactElasticCarousel from 'react-elastic-carousel';
+import useWindowSize from 'src/hooks/useWindowSize';
 import Button from '../elements/Button';
 import Icon from '../elements/Icon';
 import Image from '../elements/Image';
@@ -8,12 +9,14 @@ import View from '../elements/View';
 let autoPlaySpeed = 3000
 
 const Banner = () => {
-	return <View className="pb-10 ph-15" id="banner">
+	const [, , isMobile] = useWindowSize()
+	return <View className={`${isMobile ? 'pb-5' : 'pb-10 ph-15'}`} id="banner">
 		<ReactElasticCarousel
 			enableAutoPlay
 			pagination={false}
 			autoPlaySpeed={autoPlaySpeed}
 			className="relative"
+			showArrows={!isMobile}
 			renderArrow={({ type, onClick }) => {
 				const style = {
 					...type === 'NEXT' ? { right: 25 } : { left: 25 },
@@ -25,10 +28,10 @@ const Banner = () => {
 				</Button>
 			}}
 		>
-			<Image source={require('../../assets/images/Banner.jpg')} />
-			<Image source={require('../../assets/images/Banner.jpg')} />
-			<Image source={require('../../assets/images/Banner.jpg')} />
-			<Image source={require('../../assets/images/Banner.jpg')} />
+			<Image className="w-full" source={require('../../assets/images/Banner.jpg')} />
+			<Image className="w-full" source={require('../../assets/images/Banner.jpg')} />
+			<Image className="w-full" source={require('../../assets/images/Banner.jpg')} />
+			<Image className="w-full" source={require('../../assets/images/Banner.jpg')} />
 		</ReactElasticCarousel>
 	</View>
 }

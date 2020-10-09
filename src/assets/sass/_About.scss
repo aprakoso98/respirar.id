@@ -1,5 +1,5 @@
 #about {
-	> .view {
+	> [component-id="view"] {
 		&:nth-child(odd):not(.text) {
 			background: $grey;
 		}

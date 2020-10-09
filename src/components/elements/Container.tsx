@@ -2,7 +2,7 @@ import React from 'react';
 import View, { ViewProps } from './View';
 
 const Container = ({ className = "", children, ...rest }: ViewProps) => {
-	return <View className={`container ${className}`} {...rest}>
+	return <View idComponent="container" className={`${className}`} {...rest}>
 		{children}
 	</View>
 }

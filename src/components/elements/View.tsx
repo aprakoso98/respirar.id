@@ -10,6 +10,9 @@ export interface ViewProps extends HTMLAttributes<HTMLDivElement> {
 	self?: 'auto' | 'start' | 'end' | 'center' | 'stretch'
 	align?: 'left' | 'center' | 'right' | 'justify'
 	flex?: boolean
+	idComponent?: string
+	replaceClass?: boolean
+	wrap?: boolean
 }
 const View = ({
 	direction = "col",
@@ -21,12 +24,14 @@ const View = ({
 	align: text,
 	content,
 	children,
+	idComponent = "view",
+	wrap,
 	...rest
 }: ViewProps) => {
 	const classes = ['self', 'justify', 'items', 'content', 'text'].map(c => eval(c) && `${c}-${eval(c)}`).filter(c => c).join(' ')
-	className = `view flex flex-${direction} ${flex ? 'flex-1' : ''} ${classes} ${className}`
+	className = `flex ${wrap ? 'flex-wrap' : ''} flex-${direction} ${flex ? 'flex-1' : ''} ${classes} ${className}`
 		.replace(/\s\s+/g, ' ')
-	return <div className={className} {...rest}>{children}</div>
+	return <div component-id={idComponent} className={className} {...rest}>{children}</div>
 }
 
 export default View

@@ -1,9 +1,12 @@
 const Colors = {
+	blueSky: '#ECF2F5',
 	blue: '#9FBACD',
 	light: '#FFFFFF',
-	greyHard: '#9F9F9F',
 	dark: '#505050',
 	grey: '#F5F6F8',
+	greyHard: '#9F9F9F',
+	transparent: 'transparent',
+	get text() { return this.greyHard }
 }
 
 const Sizes = {

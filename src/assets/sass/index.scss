@@ -9,7 +9,7 @@
 		user-select: none;
 		color: $text;
 		font-size: $fontSize;
-		&:not(.fa):not(.far):not(.fas){
+		&:not([component-id="icon"]) {
 			font-family: Regular;
 		}
 	}

@@ -8,7 +8,11 @@ interface IconProps extends HTMLAttributes<HTMLLIElement> {
 }
 
 const Icon = ({ onClick, regular, solid, className = "", name, ...rest }: IconProps) => {
-	return <i {...rest} onClick={onClick} className={`icon ${regular ? 'far' : solid ? 'fas' : 'fa'} fa-${name} ${onClick ? 'pointer' : ''} ${className}`} />
+	return <i {...rest}
+		component-id="icon"
+		onClick={onClick}
+		className={`${regular ? 'far' : solid ? 'fas' : 'fa'} fa-${name} ${onClick ? 'pointer' : ''} ${className}`}
+	/>
 }
 
 export default Icon

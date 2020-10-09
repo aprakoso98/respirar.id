@@ -5,7 +5,7 @@ interface ImageProps extends HTMLAttributes<HTMLImageElement> {
 }
 
 const Image = ({ className = "", source, ...rest }: ImageProps) => {
-	return <img {...rest} alt="" className={`flex ${className}`} src={source} />
+	return <img {...rest} alt="" component-id="image" className={`flex ${className}`} src={source} />
 }
 
 export default Image

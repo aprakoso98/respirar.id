@@ -6,10 +6,10 @@ interface ButtonProps extends ViewProps {
 	children?: React.ReactNode | string
 }
 
-const Button = ({ children, justify, className = "", ...rest }: ButtonProps) => {
+const Button = ({ replaceClass, children, justify, className = "", ...rest }: ButtonProps) => {
 	return <Wrapper
 		justify={justify ? justify : typeof children === 'string' ? 'center' : 'between'}
-		className={`button ph-5 pv-2 pointer ${className}`} {...rest}>
+		className={`button pointer ${replaceClass ? '' : 'ph-5 pv-2'} ${className}`} {...rest}>
 		{children}
 	</Wrapper>
 }

@@ -7,8 +7,8 @@ interface Props extends ViewProps {
 	unsetPropsOnChildren?: boolean
 }
 
-const Text = ({ className = "", unsetPropsOnChildren, children, ...props }: Props) => {
-	return <Wrapper className={`text ${className}`} justify="start" children={
+const Text = ({ unsetPropsOnChildren, children, ...props }: Props) => {
+	return <Wrapper idComponent="text" justify="start" children={
 		Array.isArray(children) ?
 			children.rMap(
 				(c: React.ReactElement | string) => typeof c === 'string' ?

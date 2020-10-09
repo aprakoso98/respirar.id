@@ -1,13 +1,15 @@
 import { useState } from 'react'
 
-const useStateObject = <S>(initState: S) => {
+const useStateObject = (initState?: object) => {
 	const [state, setState] = useState(initState || {})
-	return [state as typeof initState, (newValue: S) => {
+	return [state as typeof initState, (newValue: object) => {
 		setState({ ...state, ...newValue })
-	}, (override: S) => {
+	}, (override: object) => {
 		setState(override)
-	}]
+	}] as const
 }
+
+
 
 const useStateArray = (initState: any[] = []) => {
 	const [state, setState] = useState(initState)
