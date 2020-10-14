@@ -7,7 +7,7 @@ interface ModalProps {
 
 const Modal = ({ visible }: ModalProps): JSX.Element => {
 	return <>
-		{visible && <View className={`absolute w-full bg-dark`} >hsdfghsgdf</View>}
+		{visible && <View className={`absolute w-full h-full bg-light`} items="center" justify="center">hsdfghsgdf</View>}
 	</>
 }
 
