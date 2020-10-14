@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-eval */
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, ReactElement, ReactFragment } from 'react';
+
+type childrenType = ReactElement | ReactFragment | boolean | null;
 
 export interface ViewProps extends HTMLAttributes<HTMLDivElement> {
-	children?: React.ReactNode
+	children?: childrenType | childrenType[]
 	direction?: 'row' | 'col' | 'col-reverse' | 'row-reverse'
 	items?: 'start' | 'end' | 'center' | 'baseline' | 'stretch'
 	content?: 'center' | 'start' | 'end' | 'between' | 'around' | 'evenly'
@@ -14,24 +17,25 @@ export interface ViewProps extends HTMLAttributes<HTMLDivElement> {
 	replaceClass?: boolean
 	wrap?: boolean
 }
+
 const View = ({
 	direction = "col",
 	className = "",
 	flex,
-	justify,
-	self,
-	items,
-	align: text,
-	content,
 	children,
 	idComponent = "view",
 	wrap,
+	justify,
+	self,
+	items,
+	content,
+	align: text,
 	...rest
-}: ViewProps) => {
+}: ViewProps): ReactElement => {
 	const classes = ['self', 'justify', 'items', 'content', 'text'].map(c => eval(c) && `${c}-${eval(c)}`).filter(c => c).join(' ')
 	className = `flex ${wrap ? 'flex-wrap' : ''} flex-${direction} ${flex ? 'flex-1' : ''} ${classes} ${className}`
 		.replace(/\s\s+/g, ' ')
-	return <div component-id={idComponent} className={className} {...rest}>{children}</div>
+	return <div component-id={idComponent} className={className} {...rest}>{children && children}</div>
 }
 
 export default View

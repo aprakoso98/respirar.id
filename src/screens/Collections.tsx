@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from 'src/components/elements/Button';
 import Container from 'src/components/elements/Container';
@@ -6,22 +6,37 @@ import { Divider } from 'src/components/elements/Divider';
 import Image from 'src/components/elements/Image';
 import Text from 'src/components/elements/Text';
 import View from 'src/components/elements/View';
+import { useStateArray } from 'src/hooks/useState';
 import useWindowSize from 'src/hooks/useWindowSize';
+import { getProduct } from 'src/utils/api';
+import { collectionType } from 'src/utils/types';
+import { convertPath, priceRange, replaceSpaces } from '../utils/helper';
 
-const Collections = () => {
+const Collections = (): JSX.Element => {
 	const history = useHistory()
 	const [, , isMobile] = useWindowSize()
+	const [collections, , setCollections] = useStateArray<collectionType>()
+	const getData = async () => {
+		const { status, data } = await getProduct() as { status: boolean, data: collectionType[] }
+		if (status) {
+			setCollections(data)
+		}
+	}
+	const effect = () => {
+		getData()
+	}
+	useEffect(effect, [])
 	return <Container className={`${isMobile ? 'ph-5 mb-5' : 'ph-15 mb-10'}`}>
 		<Text className="title">Collections</Text>
 		<View direction={isMobile ? 'col' : 'row'} className="flex-wrap -m-2 pb-3 pt-10">
-			{[1, 2, 3, 4, 5, 6, 7, 8].rMap(() => <View className={`p-2 ${isMobile ? '' : 'w-1/3'}`}>
+			{collections.rMap((product: collectionType) => <View className={`p-2 ${isMobile ? '' : 'w-1/3'}`}>
 				<View className="p-5 background-blueSky relative">
-					<Image source={require('../assets/images/Baju-3.png')} />
-					<Button className="absolute bg-blue c-light w-full l-0 b-0" onClick={() => history.push('/my-product')}>BUY NOW</Button>
+					<Image source={convertPath(product.image)} />
+					<Button className="absolute bg-blue c-light w-full l-0 b-0" onClick={() => history.push(`/${replaceSpaces(product.productUrl)}`)}>BUY NOW</Button>
 				</View>
 				<View className="pv-2">
-					<Text>Anim et nisi incididunt esse et non.</Text>
-					<Text className="c-blue">Rp. 250.000</Text>
+					<Text>{product.shortDescription}</Text>
+					<Text className="c-blue">{priceRange(product.prices)}</Text>
 				</View>
 				<Divider />
 			</View>)}

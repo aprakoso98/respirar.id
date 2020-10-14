@@ -1,10 +1,11 @@
+import 'src/utils'
 import 'src/utils/default'
 import 'src/assets/sass/index.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import App from './screens';
 import * as serviceWorker from './serviceWorker';
+import App from './screens';
 
 ReactDOM.render(
   <React.StrictMode>

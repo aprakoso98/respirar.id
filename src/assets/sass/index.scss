@@ -2,6 +2,10 @@
 @import "functions";
 @import "global";
 
+html, body, #root, #app {
+	height: 100%;
+}
+
 #root {
 	* {
 		-webkit-user-select: none;

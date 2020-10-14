@@ -32,7 +32,7 @@ const Home = () => {
 			<View className={`${isMobile ? '' : '-mt-5 w-1/2'}`}>
 				<Image source={require('../assets/images/photo2.png')} />
 			</View>
-			{isMobile && <Text className="title">About Respirar</Text>}
+			{/* {isMobile && <Text className="title">About Respirar</Text>} */}
 		</Wrapper>
 	</Container>
 }

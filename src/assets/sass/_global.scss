@@ -1,15 +1,6 @@
 .pointer {
 	cursor: pointer;
 }
-.button {
-  background: $light;
-	// padding: $secondary $base;
-	&.link {
-		padding: 0;
-		background: transparent;
-		justify-content: flex-start;
-	}
-}
 .title {
   color: $blue !important;
   font-size: $base * 2 !important;
@@ -19,8 +10,25 @@
     margin-bottom: $base;
   }
 }
-
+.shadow {
+  box-shadow: 1px 1px $secondary lighten($greyHard, 20);
+}
+.b-1 {
+  border: 1px solid $dark;
+}
+.brd-1 {
+  border-radius: $secondary;
+}
 [component-id] {
+  @include append-attr('button') {
+    background: $light;
+    // padding: $secondary $base;
+    &.link {
+      padding: 0;
+      background: transparent;
+      justify-content: flex-start;
+    }
+  }
   @include append-attr('icon') {
     &.li-item {
       margin: {
@@ -54,9 +62,9 @@
   transition: $transition;
 }
 .selection {
-  -webkit-user-select: all;
-  -ms-user-select: all;
-  user-select: all;
+  -webkit-user-select: all !important;
+  -ms-user-select: all !important;
+  user-select: all !important;
 }
 .no {
   &-margin {

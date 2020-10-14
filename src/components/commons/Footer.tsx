@@ -18,7 +18,7 @@ const Footer = () => {
 	return <>
 		{!isHome && <Divider />}
 		<View className={`${isMobile ? 'pt-5' : 'pt-10 ph-15'} bg-light`} id="footer">
-			<Wrapper direction={isMobile ? 'col' : 'row'} className={`${isMobile ? 'mb-10 ph-5' : 'mb-15 ph-10'}`} items={isMobile ? 'center' : undefined}>
+			<Wrapper direction={isMobile ? 'col' : 'row'} className={`${isMobile ? 'mb-10 ph-5' : 'mb-15 ph-10'}`} items={isMobile ? 'center' : 'start'}>
 				<View  className={`${isMobile ? 'w-1/2 mt-2' : 'w-1/6'}`}>
 					<Image source={require('../../assets/images/Logo.png')} />
 				</View>

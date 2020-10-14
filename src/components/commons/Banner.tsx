@@ -6,7 +6,7 @@ import Icon from '../elements/Icon';
 import Image from '../elements/Image';
 import View from '../elements/View';
 
-let autoPlaySpeed = 3000
+const autoPlaySpeed = 3000
 
 const Banner = () => {
 	const [, , isMobile] = useWindowSize()

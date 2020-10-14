@@ -43,7 +43,8 @@ const Header = () => {
 								setState({ menuVisible: false })
 								history.push(path)
 							}}
-							className={`${isMobile ? 'pv-2' : ''} ${state.currentPath === path ? 'active' : ''} bg-transparent c-dark`}>{name}{isMobile && <Icon name="chevron-right" />}</Button>
+							textProps={{ className: 'c-dark' }}
+							className={`${isMobile ? 'pv-2' : ''} ${state.currentPath === path ? 'active' : ''} bg-transparent`}>{name}{isMobile && <Icon name="chevron-right" />}</Button>
 					})
 				}
 			</Wrapper>

@@ -1,29 +1,27 @@
 import { useState } from 'react'
 
-const useStateObject = (initState?: object) => {
-	const [state, setState] = useState(initState || {})
-	return [state as typeof initState, (newValue: object) => {
-		setState({ ...state, ...newValue })
-	}, (override: object) => {
-		setState(override)
-	}] as const
+interface stateType { [key: string]: unknown }
+
+const useStateObject = <S extends stateType>(initState: S): [S, (newValue: S) => void] => {
+	const [state, setState] = useState(initState)
+	return [state, (newValue: S) => setState({ ...state, ...newValue })]
 }
 
-
-
-const useStateArray = (initState: any[] = []) => {
-	const [state, setState] = useState(initState)
-	return [state, (newValue: any, indexOrPush: number | boolean) => {
-		let newState = state.slice()
-		if (typeof indexOrPush === 'boolean' && indexOrPush) {
-			newState.push(newValue)
+const useStateArray = <S>(initialValue: S[] = []): [
+	S[],
+	(state: S, indexOrPush?: boolean | number) => void,
+	(override: S[]) => void
+] => {
+	const [state, setState] = useState(initialValue || [])
+	return [state, (value: S, indexOrPush?: boolean | number) => {
+		const newState = state.slice()
+		if (typeof indexOrPush === 'boolean') {
+			newState.push(value)
 		} else if (typeof indexOrPush === 'number') {
-			newState[indexOrPush] = newValue
+			newState[indexOrPush] = value
 		}
 		setState(newState)
-	}, (override: any[]) => {
-		setState(override)
-	}] as const
+	}, (override: S[]) => setState(override)]
 }
 
 export { useStateObject, useStateArray }
