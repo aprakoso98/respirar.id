@@ -19,10 +19,6 @@ export type marketplaceType = {
 	marketPlaceName: string
 }
 
-/** 
- * @ Key is an id marketplace, and value is url 
- * @ to convert it become valid value, just add it with marketplace
- * */
 export type productMarketplaceType = {
 	[key: string]: string
 }

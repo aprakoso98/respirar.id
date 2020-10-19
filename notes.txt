@@ -1,2 +1,1 @@
-- create modal
-- setup redux
+bug 404 screen not 100%

@@ -2,7 +2,7 @@
 /* eslint-disable no-eval */
 import React, { HTMLAttributes, ReactElement, ReactFragment } from 'react';
 
-type childrenType = ReactElement | ReactFragment | boolean | null;
+type childrenType = JSX.Element | ReactElement | ReactFragment | boolean | null;
 
 export interface ViewProps extends HTMLAttributes<HTMLDivElement> {
 	children?: childrenType | childrenType[]
@@ -21,9 +21,10 @@ export interface ViewProps extends HTMLAttributes<HTMLDivElement> {
 const View = ({
 	direction = "col",
 	className = "",
+	idComponent = "view",
 	flex,
 	children,
-	idComponent = "view",
+	replaceClass,
 	wrap,
 	justify,
 	self,
@@ -33,7 +34,7 @@ const View = ({
 	...rest
 }: ViewProps): ReactElement => {
 	const classes = ['self', 'justify', 'items', 'content', 'text'].map(c => eval(c) && `${c}-${eval(c)}`).filter(c => c).join(' ')
-	className = `flex ${wrap ? 'flex-wrap' : ''} flex-${direction} ${flex ? 'flex-1' : ''} ${classes} ${className}`
+	className = replaceClass ? className : `flex ${wrap ? 'flex-wrap' : ''} flex-${direction} ${flex ? 'flex-1' : ''} ${classes} ${className}`
 		.replace(/\s\s+/g, ' ')
 	return <div component-id={idComponent} className={className} {...rest}>{children && children}</div>
 }

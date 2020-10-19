@@ -1,9 +1,8 @@
 // @ts-nocheck
-import React from 'react';
+import React, { useEffect } from 'react';
 import View from '../elements/View';
 import Container from '../elements/Container';
 import Wrapper from '../elements/Wrapper';
-import Image from '../elements/Image';
 import Button from '../elements/Button';
 import Icon from '../elements/Icon';
 import { useHistory } from 'react-router-dom';
@@ -11,14 +10,26 @@ import Input from '../elements/Input';
 import { useStateObject } from 'src/hooks/useState';
 import { Colors } from 'src/utils/constants';
 import useWindowSize from 'src/hooks/useWindowSize';
+import { getInfo } from 'src/utils/api';
+import { parseAll } from 'src/utils/helper';
 
 const Header = () => {
 	const [state, setState] = useStateObject({
 		search: '',
 		searchVisible: false,
 		currentPath: window.location.pathname,
-		menuVisible: false
+		menuVisible: false,
+		Logo: () => null
 	})
+	const getData = async () => {
+		const { data } = await getInfo({ key: 'logo' })
+		// @ts-ignore
+		setState({ Logo: parseAll([data]).logo })
+	}
+	const effect = () => {
+		getData()
+	}
+	useEffect(effect, [])
 	const [, , isMobile] = useWindowSize()
 	const history = useHistory()
 	const menu = [['/', 'Home'], ['/about', 'About Us'], ['/collections', 'Collections']]
@@ -58,7 +69,7 @@ const Header = () => {
 							borderColor: isMobile ? Colors.text : state.searchVisible ? Colors.text : Colors.transparent
 						}
 					}}
-					style={isMobile ? {} : { width: !state.searchVisible ? 0 : 175 }}
+					style={isMobile ? {} : { width: isMobile ? '100%' : !state.searchVisible ? 0 : 175 }}
 					onBlur={() => setState({ searchVisible: false })}
 					renderRightAccessory={!isMobile ? accessory : undefined}
 					renderLeftAccessory={isMobile ? accessory : undefined}
@@ -70,7 +81,7 @@ const Header = () => {
 	return <Container className={`${isMobile ? 'ph-5 pv-5' : 'pv-5 ph-15'}`} id="header">
 		<Wrapper direction>
 			<View items="start" className={`${isMobile ? 'w-1/2' : 'w-1/5'}`}>
-				<Image source={require('../../assets/images/Logo.png')} />
+				<state.Logo />
 			</View>
 			{isMobile ? <Icon onClick={() => setState({ menuVisible: !state.menuVisible })} name="bars" /> : <Menu />}
 		</Wrapper>

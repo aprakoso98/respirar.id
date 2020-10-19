@@ -6,7 +6,15 @@ const { BASE_URL } = config
 const API = BASE_URL + '/api.php'
 export const FILE_PATH = BASE_URL + '/files'
 
-export const getProduct = async <S>(params: object = {}):  Promise<ResponseType<S>> => {
+export const getBanner = async <S>(params: object = {}): Promise<ResponseType<S>> => {
+	const resp = await axios.post(API, {
+		action: "GetBanner",
+		...params
+	})
+	return resp.data
+}
+
+export const getProduct = async <S>(params: object = {}): Promise<ResponseType<S>> => {
 	const resp = await axios.post(API, {
 		action: "GetProduct",
 		...params
@@ -14,9 +22,25 @@ export const getProduct = async <S>(params: object = {}):  Promise<ResponseType<
 	return resp.data
 }
 
-export const getMarketplace = async <S>(params: object = {}):  Promise<ResponseType<S>> => {
+export const getMarketplace = async <S>(params: object = {}): Promise<ResponseType<S>> => {
 	const resp = await axios.post(API, {
 		action: "GetMarketplace",
+		...params
+	})
+	return resp.data
+}
+
+export const getAbout = async <S>(params: object = {}): Promise<ResponseType<S>> => {
+	const resp = await axios.post(API, {
+		action: "GetAbout",
+		...params
+	})
+	return resp.data
+}
+
+export const getInfo = async <S>(params: object = {}): Promise<ResponseType<S>> => {
+	const resp = await axios.post(API, {
+		action: "GetInfo",
 		...params
 	})
 	return resp.data

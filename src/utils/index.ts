@@ -18,6 +18,11 @@ declare global {
 		convertRupiah(): string
 	}
 	interface String {
+		kebabToCamel(): string
+		snakeToCamel(): string
+		camelToSnake(): string
+		camelToKebab(): string
+		openUrl(): void
 		validURL(): boolean
 		generateInitial(): string
 		ucfirst(): string

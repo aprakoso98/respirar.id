@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Banner from 'src/components/commons/Banner';
 import Container from 'src/components/elements/Container';
 import HomeCard from 'src/components/commons/HomeCard';
@@ -9,17 +9,30 @@ import Text from 'src/components/elements/Text';
 import Button from 'src/components/elements/Button';
 import Icon from 'src/components/elements/Icon';
 import useWindowSize from '../hooks/useWindowSize';
+import { getProduct } from '../utils/api';
 
 const Home = () => {
 	const [, , isMobile] = useWindowSize()
+	const [products, setProducts] = useState([])
+	const getData = async () => {
+		const { status, data } = await getProduct({ highlight: true })
+		if (status) {
+			setProducts(data as [])
+		}
+	}
+	useEffect(() => {
+		getData()
+	}, [getData])
 	return <Container className={isMobile ? '' : 'pt-5'} id="home">
 		<Banner />
 		{/* @ts-ignore */}
-		<Wrapper wrap={isMobile} className={`${isMobile ? 'pb-5 ph-5' : 'pb-10 ph-15'}`}>
-			<HomeCard className={`${isMobile ? '' : 'pv-2 pr-2'}`} image={require('../assets/images/Img-3.jpg')} />
-			<HomeCard className={`${isMobile ? 'mt-2' : 'p-2'}`} image={require('../assets/images/Img-2.jpg')} />
-			<HomeCard className={`${isMobile ? 'mt-2' : 'pv-2 pl-2'}`} image={require('../assets/images/Img-1.jpg')} />
-		</Wrapper>
+		<View className={`${isMobile ? 'pb-5 ph-5' : 'pb-10 ph-15'}`}>
+			<Wrapper wrap={isMobile} justify="center" className="-m-1">
+				{products.rMap(product => {
+					return <HomeCard className="m-1 bg-blue" {...product} />
+				})}
+			</Wrapper>
+		</View>
 		<Wrapper direction={isMobile ? 'col-reverse' : 'row'} className={`bg-grey ${isMobile ? 'pv-5 ph-5' : 'ph-25'}`} id="about">
 			<View className={`${isMobile ? '' : 'w-1/2'}`}>
 				{!isMobile && <Text className="title">About Respirar</Text>}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import Header from 'src/components/commons/Header';
 import Footer from 'src/components/commons/Footer';
@@ -16,14 +16,26 @@ import useWindowSize from 'src/hooks/useWindowSize';
 import { screenProps } from 'src/utils/types';
 import NotFound from './NotFound';
 import Modal from '../components/elements/Modal';
+import { useDispatch, useSelector } from 'react-redux';
+import actionMarketplaces from '../redux/actions/marketplaces';
 
 const App = (): JSX.Element => {
 	const [isHome, setIsHome] = useState(window.location.pathname === '/')
 	const history = useHistory()
+	const dispatch = useDispatch()
+	// @ts-ignore
+	const ModalState = useSelector(state => state.Modal)
 	// @ts-ignore
 	history.listen(({ pathname }) => setIsHome(pathname === '/'))
-	return <Container className="relative" justify="between" id="app" style={isHome ? { background: `url('${require('../assets/images/Sky-BG.jpg')}')` } : {}}>
-		<Modal visible />
+	useEffect(() => {
+		dispatch(actionMarketplaces())
+	}, [dispatch])
+	return <Container
+		className={ModalState.visible ? 'fixed' : 'relative'}
+		justify="between"
+		id="app"
+		style={isHome ? { background: `url('${require('../assets/images/Sky-BG.jpg')}')` } : {}}>
+		<Modal visible={ModalState.visible}>{ModalState.content}</Modal>
 		<Header />
 		<View flex id="scroll">
 			<Switch>

@@ -51,6 +51,40 @@ Number.prototype.format = function (n = 0, x = 3) {
 	const regex = '\\d(?=(\\d{' + (x) + '})+' + (n > 0 ? '\\.' : '$') + ')';
 	return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(regex, 'g'), '$&.');
 }
+const caseReplacer = (str: string, separator: '_' | '-') => {
+	const arr = str.split(separator);
+	const capital = arr.map((item, index) => index ? item.charAt(0).toUpperCase() + item.slice(1).toLowerCase() : item.toLowerCase());
+	const toCase = capital.join("");
+	return toCase
+}
+const caseReplacerFromCamel = function (str: string, separator: '-' | '_') {
+	return str.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, `$1${separator}$2`).toLowerCase();
+}
+String.prototype.kebabToCamel = function () {
+	const camelCase = caseReplacer(this as string, '-')
+	return camelCase
+}
+String.prototype.snakeToCamel = function () {
+	const camelCase = caseReplacer(this as string, '_')
+	return camelCase
+}
+String.prototype.camelToSnake = function () {
+	const snakeCase = caseReplacerFromCamel(this as string, '_')
+	return snakeCase
+}
+String.prototype.camelToKebab = function () {
+	const kebabCase = caseReplacerFromCamel(this as string, '-')
+	return kebabCase
+}
+String.prototype.openUrl = function () {
+	const url = this as string
+	if (url.validURL()) {
+		const win = window.open(url, '_blank')
+		if (win) win.focus()
+	} else {
+		console.log('String is not url')
+	}
+}
 String.prototype.validURL = function () {
 	const str = this as string
 	const pattern = new RegExp('^(https?:\\/\\/)?' + // protocol

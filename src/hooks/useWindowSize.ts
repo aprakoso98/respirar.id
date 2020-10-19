@@ -1,6 +1,8 @@
 import { useLayoutEffect, useState } from "react"
 
-const useWindowSize = () => {
+type windowType = [number, number, boolean]
+
+const useWindowSize = (): windowType => {
 	const [size, setSize] = useState([0, 0, false])
 	useLayoutEffect(() => {
 		const updateSize = () => {
@@ -10,7 +12,7 @@ const useWindowSize = () => {
 		updateSize()
 		return () => window.removeEventListener('resize', updateSize)
 	}, [])
-	return size
+	return size as windowType
 }
 
 export default useWindowSize

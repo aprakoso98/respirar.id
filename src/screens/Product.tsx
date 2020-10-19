@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Button from 'src/components/elements/Button';
 import Container from 'src/components/elements/Container';
@@ -7,27 +8,27 @@ import Image from 'src/components/elements/Image';
 import Text from 'src/components/elements/Text';
 import View from 'src/components/elements/View';
 import Wrapper from 'src/components/elements/Wrapper';
-import { useStateArray, useStateObject } from 'src/hooks/useState';
+import { useStateObject } from 'src/hooks/useState';
 import useWindowSize from 'src/hooks/useWindowSize';
-import { getMarketplace, getProduct } from 'src/utils/api';
-import { convertPath, convertPrices } from 'src/utils/helper';
-import { marketplaceType, productMarketplaceType, producType, screenProps } from 'src/utils/types';
+import { FILE_PATH, getProduct } from 'src/utils/api';
+import { convertPath, convertPrices, generateMarketplace } from 'src/utils/helper';
+import { producType, screenProps } from 'src/utils/types';
+import { modal } from '../redux/actions/modal';
 
 const Product = ({ match: { params } }: screenProps): JSX.Element => {
 	const history = useHistory()
+	// @ts-ignore
+	const Marketplaces = useSelector(state => state.Marketplace)
 	const [, , isMobile] = useWindowSize()
-	const [marketplaces, setMarketplaces] = useStateArray<marketplaceType[]>()
 	const [state, setState] = useStateObject<{
 		sizes?: string[],
 		prices?: string[],
-		marketplaces?: productMarketplaceType,
 		selectedSize?: number,
 	}>({})
 	const [product, setProduct] = useStateObject<Partial<producType>>({})
 	const getData = async () => {
 		const { status, data } = await getProduct<producType>({ productUrl: params.product })
 		if (status) {
-			loadMarketplace()
 			setProduct(data)
 			setState({
 				sizes: data.sizes.split('|'),
@@ -39,12 +40,24 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 		}
 	}
 	const buyProduct = async () => {
-	}
-	const loadMarketplace = async () => {
-		const marketplaces = JSON.parse(product.marketplaces || '{}')
-		const { status, data } = await getMarketplace<marketplaceType[]>()
-		if (status) {
-			setMarketplaces(data)
+		const listMarketplace: any[] = generateMarketplace(product.marketplaces, Marketplaces)
+		if (listMarketplace.length > 1) {
+			modal.setContent(<View className="bg-light">
+				{listMarketplace.rMap(m => {
+					const url: string = m.baseUrl + m.link
+					console.log(url)
+					return <Button onClick={url.openUrl}>
+						<Image className="w-1/4" source={FILE_PATH + m.icon} />
+						<Text className="w-full">{m.marketplaceName}</Text>
+					</Button>
+				})}
+			</View>).show()
+		} else if (listMarketplace.length === 1) {
+			const { baseUrl, link } = listMarketplace[0]
+			const url: string = baseUrl + link
+			url.openUrl()
+		} else {
+			alert('Not found')
 		}
 	}
 	const effect = () => {
