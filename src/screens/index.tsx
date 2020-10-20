@@ -31,7 +31,7 @@ const App = (): JSX.Element => {
 	// @ts-ignore
 	history.listen(({ pathname }) => {
 		setIsHome(pathname === '/')
-		// dispatch(actionUi({ search: '' }))
+		window.scrollTo({ top: 0 })
 	})
 	useEffect(() => {
 		getData()

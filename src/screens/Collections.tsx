@@ -34,7 +34,7 @@ const Collections = ({ match: { params } }: screenProps): JSX.Element => {
 			{collections.length > 0 ? collections.rMap((product: collectionType) => <View className={`p-2 ${isMobile ? '' : 'w-1/3'}`}>
 				<View className="p-5 background-blueSky relative">
 					<Image source={FILE_PATH + product.image} />
-					<Button className="absolute bg-blue c-light w-full l-0 b-0" onClick={() => history.push(`/${replaceSpaces(product.productUrl)}`)}>BUY NOW</Button>
+					<Button textProps={{ className: 'c-light' }} className="absolute bg-blue c-light w-full l-0 b-0" onClick={() => history.push(`/${replaceSpaces(product.productUrl)}`)}>BUY NOW</Button>
 				</View>
 				<View className="pv-2">
 					<Text className="f-5 c-blue">{product.productName}</Text>
