@@ -19,7 +19,7 @@ const Input = ({
 }: InputProps): JSX.Element => {
 	return <Wrapper idComponent="input" className={`${noBorder ? 'no-border' : ''} ${className}`} {...wrapper}>
 		{renderLeftAccessory()}
-		<input {...rest} />
+		<input className="w-full" {...rest} />
 		{renderRightAccessory()}
 	</Wrapper>
 }

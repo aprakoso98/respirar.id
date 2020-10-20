@@ -35,7 +35,7 @@ export const parseAll = (data: unknown) => {
 	const allData = data as {
 		key: string,
 		detail: string,
-		type: 'image' | 'text' | 'list' | 'object' | 'email' | 'tel' | 'article' | 'whatsapp'
+		type: 'image' | 'text' | 'list' | 'object' | 'email' | 'tel' | 'article' | 'whatsapp' | 'about-home'
 	}[]
 	return allData.reduce((ret: object, data) => {
 		const key = data.key.kebabToCamel()
@@ -45,6 +45,7 @@ export const parseAll = (data: unknown) => {
 				// @ts-ignore 
 				ret[key] = (props: ImageProps) => Image({ source: FILE_PATH + detail, ...props })
 				break
+			case 'about-home':
 			case 'list':
 			case 'object':
 				// @ts-ignore 

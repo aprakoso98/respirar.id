@@ -1,9 +1,7 @@
-const actionUi = () => {
+const actionUi = (data: object) => {
 	return {
 		type: 'GET_UI',
-		payload: new Promise(resolve => {
-			resolve({})
-		})
+		payload: data
 	}
 }
 

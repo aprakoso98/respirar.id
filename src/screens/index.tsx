@@ -18,23 +18,37 @@ import NotFound from './NotFound';
 import Modal from '../components/elements/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import actionMarketplaces from '../redux/actions/marketplaces';
+import { FILE_PATH, getInfo } from 'src/utils/api';
+import { parseAll } from 'src/utils/helper'
 
 const App = (): JSX.Element => {
 	const [isHome, setIsHome] = useState(window.location.pathname === '/')
 	const history = useHistory()
 	const dispatch = useDispatch()
+	const [BG, setBg] = useState('')
 	// @ts-ignore
 	const ModalState = useSelector(state => state.Modal)
 	// @ts-ignore
-	history.listen(({ pathname }) => setIsHome(pathname === '/'))
+	history.listen(({ pathname }) => {
+		setIsHome(pathname === '/')
+		// dispatch(actionUi({ search: '' }))
+	})
 	useEffect(() => {
+		getData()
 		dispatch(actionMarketplaces())
 	}, [dispatch])
+	const getData = async () => {
+		const { status, data } = await getInfo({ key: 'web-bg' })
+		if (status) {
+			// @ts-ignore
+			setBg(parseAll(data).webBg)
+		}
+	}
 	return <Container
 		className={ModalState.visible ? 'fixed' : 'relative'}
 		justify="between"
 		id="app"
-		style={isHome ? { background: `url('${require('../assets/images/Sky-BG.jpg')}')` } : {}}>
+		style={isHome ? { background: `url('${FILE_PATH + BG}')` } : {}}>
 		<Modal visible={ModalState.visible}>{ModalState.content}</Modal>
 		<Header />
 		<View flex id="scroll">
@@ -70,6 +84,7 @@ const RouteProduct = () => {
 		<Route path="/404" exact component={NotFound} />
 		<Route path="/about" exact component={About} />
 		<Route path="/collections" exact component={Collections} />
+		<Route path="/collections/:search" exact component={Collections} />
 		<Route path="/" exact component={Home} />
 	</>
 }

@@ -1,7 +1,5 @@
 const initState: object = {
-	data: {},
-	isError: false,
-	isLoading: false
+	search: ''
 }
 
 const reducerUi = (state = initState, actions: any) => {
@@ -9,14 +7,12 @@ const reducerUi = (state = initState, actions: any) => {
 		case 'GET_UI':
 			return {
 				...state,
-				data: actions.payload,
-				isLoading: true
+				...actions.payload
 			}
 		case 'GET_UI_FULFILLED':
 			return {
 				...state,
-				data: actions.payload,
-				isLoading: false
+				...actions.payload,
 			}
 		case 'GET_UI_REJECTED':
 			return { ...initState }

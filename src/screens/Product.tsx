@@ -11,7 +11,7 @@ import Wrapper from 'src/components/elements/Wrapper';
 import { useStateObject } from 'src/hooks/useState';
 import useWindowSize from 'src/hooks/useWindowSize';
 import { FILE_PATH, getProduct } from 'src/utils/api';
-import { convertPath, convertPrices, generateMarketplace } from 'src/utils/helper';
+import { convertPrices, generateMarketplace } from 'src/utils/helper';
 import { producType, screenProps } from 'src/utils/types';
 import { modal } from '../redux/actions/modal';
 
@@ -67,7 +67,7 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 	return <Container className={`${isMobile ? 'ph-5 pv-5' : 'ph-15 pv-10'}`}>
 		<Wrapper direction={isMobile ? 'col' : 'row'} items="start">
 			<View className={`bg-blueSky ${isMobile ? '' : 'w-2/5 mr-5'}`}>
-				<Image source={product.image ? convertPath(product.image) : require('../assets/images/product-thumb.png')} />
+				<Image source={product.image ? FILE_PATH + product.image : require('../assets/images/product-thumb.png')} />
 			</View>
 			<View className={`${isMobile ? '' : 'ml-5 w-3/5'}`}>
 				<Text className="title f-10">{product.productName}</Text>
