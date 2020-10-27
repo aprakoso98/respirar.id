@@ -6,7 +6,6 @@ import Wrapper from './Wrapper';
 interface ButtonProps extends Omit<ViewProps, 'children'> {
 	children?: textChild | textChild[]
 	textProps?: Omit<TextProps, 'children'>
-	ghd?: true | false
 }
 
 const Button = ({ textProps, replaceClass, children, justify, className = "", ...rest }: ButtonProps): ReactElement => {
