@@ -2,7 +2,6 @@
 /* eslint-disable no-extend-native */
 /* eslint-disable @typescript-eslint/no-this-alias */
 import { isValidElement, cloneElement } from 'react';
-import { objectType } from './types';
 
 FormData.prototype.appendObject = function (obj, except) {
 	except = except || []
@@ -157,7 +156,7 @@ String.prototype.getParamFromUrl = function () {
 		return decodeURIComponent(str.replace(decodeRE, " "));
 	};
 	let e;
-	const params: objectType<any> = {}
+	const params: MyObject<any> = {}
 	while (e = re.exec(query)) {
 		let k = decode(e[1])
 		const v = decode(e[2]);
@@ -167,7 +166,7 @@ String.prototype.getParamFromUrl = function () {
 		} else params[k] = v;
 	}
 
-	const assign = function (obj: objectType<any>, keyPath: string, value: string) {
+	const assign = function (obj: MyObject<any>, keyPath: string, value: string) {
 		const lastKeyIndex = keyPath.length - 1;
 		for (let i = 0; i < lastKeyIndex; ++i) {
 			const key = keyPath[i];

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-interface stateType { [key: string]: unknown }
+type stateType = MyObject<unknown>
 
 const useStateObject = <S extends stateType>(initState: S): [S, (newValue: S) => void] => {
 	const [state, setState] = useState(initState)

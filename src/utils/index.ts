@@ -1,8 +1,8 @@
-export { }
-
+export {}
 declare global {
+	type MyObject<T = string> = Record<string, T>
 	interface FormData {
-		appendObject(obj: { [key: string]: string }, except?: string[]): void;
+		appendObject(obj: MyObject, except?: string[]): void;
 	}
 	interface Array<T> {
 		generateEmpty(length: number, empty?: boolean): (string | number)[]
@@ -35,7 +35,7 @@ declare global {
 		extractNumber(): number
 		toInt(): number
 		getRawUrl(): string
-		getParamFromUrl(): { [key: string]: string }
+		getParamFromUrl(): MyObject
 	}
 	interface Math {
 		randomInt: (min: number, max: number) => number;
