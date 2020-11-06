@@ -6,3 +6,9 @@ about home button outline & bg transpaent
 bawah banner learn more redirect ke about scroll
 
 footer fb ig kecilin
+
+
+Create logs per request (parameters, response)
+
+api setinfo not upload image / file
+create api upload file

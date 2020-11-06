@@ -29,12 +29,14 @@ const Collections = ({ match: { params } }: screenProps): JSX.Element => {
 	return <Container className={`${isMobile ? 'ph-5 mb-5' : 'ph-15 mb-10'}`}>
 		<Text className="title">Collections</Text>
 		{/* @ts-ignore */}
-		{params.search !== '' && <Text>Search result for : <Text className="ml-1 !Italic">{params.search}</Text></Text>}
+		{params.search && <Text>Search result for : <Text className="ml-1 !Italic">{params.search}</Text></Text>}
 		<View direction={isMobile ? 'col' : 'row'} className="flex-wrap -m-2 pb-3 pt-10">
-			{collections.length > 0 ? collections.rMap((product: collectionType) => <View className={`p-2 ${isMobile ? '' : 'w-1/3'}`}>
-				<View className="p-5 background-blueSky relative">
-					<Image source={FILE_PATH + product.image} />
-					<Button textProps={{ className: 'c-light' }} className="absolute bg-blue c-light w-full l-0 b-0" onClick={() => history.push(`/${replaceSpaces(product.productUrl)}`)}>BUY NOW</Button>
+			{collections.length > 0 ? collections.rMap((product: collectionType) => <View className={`p-2 ${isMobile ? '' : 'w-1/4'}`}>
+				<View className="background-blueSky">
+					<View items="center" style={{ height: 250 }} justify="center" className="p-3">
+						<Image className="w-3/4" source={FILE_PATH + product.image} />
+					</View>
+					<Button textProps={{ className: 'c-light' }} className="bg-blue c-light" onClick={() => history.push(`/${replaceSpaces(product.productUrl)}`)}>BUY NOW</Button>
 				</View>
 				<View className="pv-2">
 					<Text className="f-5 c-blue">{product.productName}</Text>
@@ -44,7 +46,7 @@ const Collections = ({ match: { params } }: screenProps): JSX.Element => {
 				<Divider />
 			</View>) : <Text className="mh-2">No item found</Text>}
 		</View>
-	</Container>
+	</Container >
 }
 
 export default Collections
