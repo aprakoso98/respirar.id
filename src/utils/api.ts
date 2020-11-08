@@ -1,10 +1,19 @@
 import config from '../env.json'
 import axios from 'axios';
-import { ResponseType } from './types';
+import { HighlightType, ResponseType } from './types';
 
-const { BASE_URL } = config
+const { BASE_URL, FILE_URL } = config
 const API = BASE_URL + '/api.php'
-export const FILE_PATH = BASE_URL + '/files'
+export const FILE_PATH = FILE_URL + '/'
+
+const httpRequest = async <S>(action: string, params: MyObject<unknown> = {}): Promise<ResponseType<S>> => {
+	const resp = await axios.post(API, { action, ...params })
+	return resp.data
+}
+
+export const getHighlight = (params: { forCms?: boolean } = {}): Promise<ResponseType<HighlightType[]>> => {
+	return httpRequest<HighlightType[]>('GetHighlight', params)
+}
 
 export const getBanner = async <S>(params: object = {}): Promise<ResponseType<S>> => {
 	const resp = await axios.post(API, {

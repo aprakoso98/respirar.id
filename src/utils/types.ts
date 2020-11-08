@@ -5,6 +5,8 @@ export type screenProps<Params extends { [K in keyof Params]?: string } = {}> = 
 
 export type colorType = keyof typeof Colors | string & { color?: string }
 
+export type HighlightType = Record<'name' | 'btnText' | 'image' | 'redirect' | 'id' | 'position', string> & { visible?: '1' | '0' }
+
 export interface ResponseType<R> {
 	status: boolean
 	data: R

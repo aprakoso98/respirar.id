@@ -5,14 +5,15 @@ import HomeCard from 'src/components/commons/HomeCard';
 import View from 'src/components/elements/View';
 import Wrapper from 'src/components/elements/Wrapper';
 import useWindowSize from '../hooks/useWindowSize';
-import { getProduct } from '../utils/api';
+import { getHighlight } from '../utils/api';
 import AboutHome from '../components/commons/AboutHome';
+import { HighlightType } from 'src/utils/types';
 
 const Home = () => {
 	const [, , isMobile] = useWindowSize()
-	const [products, setProducts] = useState([])
+	const [products, setProducts] = useState<HighlightType[]>([])
 	const getData = async () => {
-		const { status, data } = await getProduct({ highlight: true })
+		const { status, data } = await getHighlight()
 		if (status) {
 			setProducts(data as [])
 		}
@@ -22,10 +23,9 @@ const Home = () => {
 	}, [])
 	return <Container className={isMobile ? '' : 'pt-5'} id="home">
 		<Banner />
-		{/* @ts-ignore */}
 		<View className={`${isMobile ? 'pb-5 ph-5' : 'pb-10 ph-15'}`}>
 			<Wrapper wrap={isMobile} justify="center" className="-m-1">
-				{products.rMap(product => {
+				{products.rMap((product) => {
 					return <HomeCard className="m-1 bg-blue" {...product} />
 				})}
 			</Wrapper>
