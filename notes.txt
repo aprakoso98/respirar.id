@@ -12,3 +12,6 @@ Create logs per request (parameters, response)
 
 api setinfo not upload image / file
 create api upload file
+
+
+jadi ada ketegori di product
