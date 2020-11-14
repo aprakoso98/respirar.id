@@ -66,34 +66,40 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 	useEffect(effect, [])
 	return <Container className={`${isMobile ? 'ph-5 pv-5' : 'ph-15 pv-10'}`}>
 		<Wrapper direction={isMobile ? 'col' : 'row'} items="start">
-			<View className={`bg-blueSky ${isMobile ? '' : 'w-2/5 mr-5'}`}>
-				<Image source={product.image ? FILE_PATH + product.image : require('../assets/images/product-thumb.png')} />
+			<View direction="row" wrap className={`${isMobile ? '' : 'w-3/5 mr-5'}`}>
+				{Object.keys(product).filter(k => k.includes('image')).rMap(k => {
+					return <View className="w-1/2 p-1">
+						{/* @ts-ignore */}
+						<Image source={FILE_PATH + product[k]} />
+					</View>
+				})}
 			</View>
-			<View className={`${isMobile ? '' : 'ml-5 w-3/5'}`}>
-				<Text className="title f-10">{product.productName}</Text>
+			<View className={`${isMobile ? '' : 'ml-5 w-2/5'}`}>
+				<Text className="title f-15">{product.productName}</Text>
 				<Text className="f-3 mb-10">{state.prices && state.prices[state.selectedSize || 0]}</Text>
 				<Wrapper justify={isMobile ? 'between' : 'start'} className="mb-5">
 					<Wrapper className={`${isMobile ? '' : 'mr-5'}`}>
 						<Text>SKU :</Text>
-						<Text className="ml-1">{product.sku}</Text>
+						<Text className="ml-1 c-dark">{product.sku}</Text>
 					</Wrapper>
 					<Wrapper>
 						<Text>Avaibility :</Text>
-						<Text className="ml-1">{product.availability}</Text>
+						<Text className="ml-1 c-dark">{product.availability}</Text>
 					</Wrapper>
 				</Wrapper>
-				<Text className="mb-10">{product.description}</Text>
+				<Text className="mb-10 c-dark">{product.description}</Text>
 				<Wrapper justify={isMobile ? 'between' : 'start'}>
-					<Text className="mr-10">Sizes</Text>
+					<Text className="mr-10">Size</Text>
 					<Wrapper className={`${isMobile ? 'w-1/3' : 'w-1/6'}`}>
 						{state.sizes && state.sizes.rMap(
 							(size: string, index: number) => <Button
-								className={index === state.selectedSize ? 'b-1 brd-1' : ''}
+								textProps={{ className: index === state.selectedSize ? 'c-dark f-2' : '' }}
 								onClick={() => setState({ selectedSize: index })}>{size}</Button>
 						)}
 					</Wrapper>
 				</Wrapper>
-				<Button onClick={buyProduct} style={{ border: '1px solid' }} className="ph-2 mt-10" self="start" >BUY NOW <Icon className="ml-3" name="chevron-right" /></Button>
+				<Button onClick={buyProduct} style={{ border: '1px solid black' }} className="ph-2 mt-10" self="start" textProps={{className:'c-dark'}}>BUY NOW <Icon className="ml-3 c-dark" name="chevron-right" /></Button>
+				<Text className="mt-5">We will redirect your purchase through our marketplace</Text>
 			</View>
 		</Wrapper>
 	</Container>

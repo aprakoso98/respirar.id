@@ -27,16 +27,16 @@ const AboutHome = () => {
 	useEffect(() => {
 		getData()
 	}, [])
-	return <Wrapper direction={isMobile ? 'col-reverse' : 'row'} className={`bg-grey ${isMobile ? 'pv-5 ph-5' : 'ph-25'}`} id="about">
+	return <Wrapper direction={isMobile ? 'col-reverse' : 'row'} className={`bg-grey ${isMobile ? 'pv-5 ph-5' : 'pl-25'}`} id="about">
 		<View className={`${isMobile ? '' : 'w-1/2'}`}>
 			{!isMobile && <Text className="title">About Respirar</Text>}
 			<Text className="mr-5 mb-5 sub-title">{About.description}</Text>
-			<Button onClick={() => history.push('/about')} self="start">
-				<Text className="mr-5">Learn more</Text>
-				<Icon name="chevron-right" />
+			<Button className="b-1 bg-transparent" onClick={() => history.push('/about')} self="start">
+				<Text className="mr-5 c-dark">Learn more</Text>
+				<Icon name="chevron-right" className="c-dark" />
 			</Button>
 		</View>
-		<View className={`${isMobile ? '' : '-mt-5 w-1/2'}`}>
+		<View className={`${isMobile ? '' : '-mt-10 w-1/2'}`}>
 			<Image source={FILE_PATH + About.image} />
 		</View>
 		{isMobile && <Text className="title">About Respirar</Text>}

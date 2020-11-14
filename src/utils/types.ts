@@ -23,10 +23,12 @@ export type productMarketplaceType = MyObject
 
 export type collectionType = {
 	id: string,
+	kategori: string
 	productUrl: string,
 	productName: string,
 	shortDescription: string,
 	image: string,
+	image2: string
 	prices: string,
 	marketplaces: string
 }

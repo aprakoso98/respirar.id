@@ -17,8 +17,8 @@ const AboutList = ({ list = [] }): JSX.Element => {
 					<Text className={`title ${isMobile ? '' : 'w-2/5'}`}>{about.headline}</Text>
 					{HtmlParser(about.description)}
 				</View>
-				<View className={`${isMobile ? '' : `w-1/3 ${isOdd ? 'pr-5' : 'pl-5'}`}`}>
-					<Image source={FILE_PATH + about.image} />
+				<View self="end" className={`${isMobile ? '' : `w-1/4 ${isOdd ? 'pr-5' : 'pl-5'}`}`}>
+					<Image className="-mt-3" source={FILE_PATH + about.image} />
 				</View>
 			</Wrapper>
 		})}

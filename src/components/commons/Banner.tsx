@@ -37,7 +37,7 @@ const Banner = () => {
 					zIndex: 9
 				}
 				return <Button style={style} onClick={onClick} className="link absolute">
-					<Icon style={{ fontSize: 50 }} className="color-light" name={type === 'NEXT' ? 'arrow-right' : 'arrow-left'} />
+					<Icon style={{ fontSize: 30 }} className="color-light" name={type === 'NEXT' ? 'long-arrow-alt-right' : 'long-arrow-alt-left'} />
 				</Button>
 			}}
 		>{
@@ -49,9 +49,9 @@ const Banner = () => {
 							} else {
 								history.push(redirect)
 							}
-						}} style={{ bottom: '15%', left: '15%' }} className="b-light-1 bg-transparent absolute">
-							<Text className="c-light">{btnText}</Text>
-							<Icon className="ml-5 c-light" name="chevron-right" />
+						}} self="center" className="b-10 b-light-1 bg-light absolute">
+							<Text className="c-dark">{btnText}</Text>
+							<Icon className="ml-5 c-dark" name="chevron-right" />
 						</Button>}
 						<Image source={FILE_PATH + image} />
 					</View>

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import HtmlParser from 'react-html-parser';
 import Container from 'src/components/elements/Container';
 import Icon from 'src/components/elements/Icon';
+import Image from 'src/components/elements/Image';
 import Text from 'src/components/elements/Text';
 import View from 'src/components/elements/View';
 import Wrapper from 'src/components/elements/Wrapper';
 import useWindowSize from 'src/hooks/useWindowSize';
-import { getAbout, getInfo } from 'src/utils/api';
+import { FILE_PATH, getAbout, getInfo } from 'src/utils/api';
 import { parseAll } from 'src/utils/helper';
 import AboutList from '../components/commons/AboutList';
 
@@ -66,10 +67,12 @@ const About = () => {
 			<Text justify="center" align="center" className={`title ${isMobile ? '' : 'mb-10'}`}>Why shop with us</Text>
 			<Wrapper direction={isMobile ? 'col' : 'row'} justify="center" wrap className="-m-2">
 				{Content.aboutWhyShop.rMap(({ icon, title, description }) => <View className={`p-2 ${isMobile ? '' : 'w-1/3'}`}>
-					<View className="bg-light ph-5 pv-10 card-excellence" items="center">
-						<Icon className="f-20 c-blue" name={icon} />
-						<Text align="center" className="f-10 mt-5 mb-2 title">{title}</Text>
-						<Text align="center">{description}</Text>
+					<View className="bg-light ph-5 pt-10 pb-5 card-excellence" items="center">
+						{/* <Icon className="f-20 c-blue" name={icon} /> */}
+						<Image className="w-1/3" source={FILE_PATH + icon} />
+						{/* @ts-ignore */}
+						<Text align="center" style={{ minHeight: 72, maxHeight: 72 }} className={`f-10 mh-5 mt-5 title`}>{title}</Text>
+						{/* <Text align="center">{description}</Text> */}
 					</View>
 				</View>)}
 			</Wrapper>
