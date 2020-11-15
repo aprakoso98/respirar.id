@@ -33,7 +33,6 @@ const App = (): JSX.Element => {
 	}, [dispatch])
 	const getData = async () => {
 		const { status, data } = await getInfo({ key: 'web-bg' })
-		console.log(data)
 		if (status) {
 			// @ts-ignore
 			setBg(data[0].detail)

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import HtmlParser from 'react-html-parser';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Button from 'src/components/elements/Button';
@@ -36,7 +37,7 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 				prices: convertPrices(data.prices)
 			})
 		} else {
-			history.push('/404')
+			// history.push('/404')
 		}
 	}
 	const buyProduct = async () => {
@@ -45,7 +46,6 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 			modal.setContent(<View className="bg-light">
 				{listMarketplace.rMap(m => {
 					const url: string = m.baseUrl + m.link
-					console.log(url)
 					return <Button onClick={url.openUrl}>
 						<Image className="w-1/4" source={FILE_PATH + m.icon} />
 						<Text className="w-full">{m.marketplaceName}</Text>
@@ -87,7 +87,7 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 						<Text className="ml-1 c-dark">{product.availability}</Text>
 					</Wrapper>
 				</Wrapper>
-				<Text className="mb-10 c-dark">{product.description}</Text>
+				<Text className="mb-10 c-dark">{HtmlParser(product.description as string)}</Text>
 				<Wrapper justify={isMobile ? 'between' : 'start'}>
 					<Text className="mr-10">Size</Text>
 					<Wrapper className={`${isMobile ? 'w-1/3' : 'w-1/6'}`}>

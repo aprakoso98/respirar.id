@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Button from 'src/components/elements/Button';
 import Container from 'src/components/elements/Container';
 import Image from 'src/components/elements/Image';
+import Linkdd from 'src/components/elements/Link';
 import Text from 'src/components/elements/Text';
 import View, { ViewProps } from 'src/components/elements/View';
 import { useStateObject } from 'src/hooks/useState';
@@ -21,11 +22,13 @@ const Collections = (screen: screenProps): JSX.Element => {
 	const [Categories, , initCategory] = useStateObject({} as Tyys)
 	const getData = async () => {
 		const { status, data } = await getProduct(params) as { status: boolean, data: collectionType[] }
+		console.log(data)
 		if (status) {
 			const w = data.reduce((ret: Tyys, obj) => {
 				ret[obj.kategori] = [...ret[obj.kategori] || [], obj]
 				return ret
 			}, {})
+			console.log(w)
 			initCategory(w)
 		}
 	}
@@ -41,7 +44,7 @@ const Collections = (screen: screenProps): JSX.Element => {
 			const collections = Categories[key]
 			return <>
 				<Text className="c-blue title" self="center">{key}</Text>
-				<View justify="between" direction={isMobile ? 'col' : 'row'} className={`${isMobile ? '' : 'pl-25 pr-25'}`}>
+				<View justify="between" wrap direction={isMobile ? 'col' : 'row'} className={`${isMobile ? '' : 'pl-25 pr-25'}`}>
 					{collections.rMap((product) => <ProductView isMobile={isMobile} {...product} />)}
 				</View>
 			</>
@@ -59,7 +62,7 @@ const ProductView = ({ isMobile, image2, image, productName, productUrl, shortDe
 		MozBoxShadow: '0px 7px 23px 3px rgba(0,0,0,0.27)',
 		boxShadow: '0px 7px 23px 3px rgba(0,0,0,0.27)'
 	}
-	return <View onClick={() => history.push(`/${replaceSpaces(productUrl)}`)} style={hover ? shadow : {}} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} className={`p-2 pointer ${isMobile ? '' : 'w-2/5'}`}>
+	return <View onClick={() => history.push(productUrl)} style={{transition:'.5s',...hover ? shadow : {}}} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} className={`p-2 pointer ${isMobile ? '' : 'w-2/5'}`}>
 		<View className="relative">
 			<Image className="w-full" source={FILE_PATH + (hover ? image : image2)} />
 			{hover && <Button textProps={{ className: 'c-light' }} style={{ bottom: 0 }} className="w-full absolute bg-blue-tr c-light">SHOP NOW</Button>}

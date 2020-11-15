@@ -7,7 +7,7 @@ import HtmlParser from 'react-html-parser';
 
 export const convertPath = (str: string): string => str.replace(/\$FILE_PATH/g, FILE_PATH)
 
-export const convertPrices = (str: string): string[] => str.split('|').map(prize => prize.convertRupiah())
+export const convertPrices = (str: string): string[] => str.split('|').map(prize => prize.extractNumber().convertRupiah())
 
 export const priceRange = (prices: string): string => {
 	const pricesArr = convertPrices(prices)

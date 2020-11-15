@@ -6,8 +6,8 @@ type Props = Omit<LinkProps, 'to'> & AnchorHTMLAttributes<{}> & {
 	to?: LinkProps['to']
 }
 
-const Linkdd = ({ children, href, ...rest }: Props) => {
+const Link = ({ children, href, ...rest }: Props) => {
 	return href?.validURL() ? <a {...rest} href={href} children={children} /> : <DomLink {...rest} to={href} children={children} />
 }
 
-export default Linkdd
+export default Link
