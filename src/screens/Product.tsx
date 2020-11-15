@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import HtmlParser from 'react-html-parser';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import BreadCrumb from 'src/components/commons/BreadCrumb';
 import Button from 'src/components/elements/Button';
 import Container from 'src/components/elements/Container';
 import Icon from 'src/components/elements/Icon';
@@ -17,7 +17,6 @@ import { producType, screenProps } from 'src/utils/types';
 import { modal } from '../redux/actions/modal';
 
 const Product = ({ match: { params } }: screenProps): JSX.Element => {
-	const history = useHistory()
 	// @ts-ignore
 	const Marketplaces = useSelector(state => state.Marketplace)
 	const [, , isMobile] = useWindowSize()
@@ -75,6 +74,7 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 				})}
 			</View>
 			<View className={`${isMobile ? '' : 'ml-5 w-2/5'}`}>
+				<BreadCrumb size="3" links={[{ name: 'Collections', redirect: '/collections' }, { name: params.product }]} />
 				<Text className="title f-15">{product.productName}</Text>
 				<Text className="f-3 mb-10">{state.prices && state.prices[state.selectedSize || 0]}</Text>
 				<Wrapper justify={isMobile ? 'between' : 'start'} className="mb-5">
@@ -93,12 +93,12 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 					<Wrapper className={`${isMobile ? 'w-1/3' : 'w-1/6'}`}>
 						{state.sizes && state.sizes.rMap(
 							(size: string, index: number) => <Button
-								textProps={{ className: index === state.selectedSize ? 'c-dark f-2' : '' }}
+								textProps={{ style: { whiteSpace: 'nowrap' }, className: index === state.selectedSize ? 'c-dark f-2' : '' }}
 								onClick={() => setState({ selectedSize: index })}>{size}</Button>
 						)}
 					</Wrapper>
 				</Wrapper>
-				<Button onClick={buyProduct} style={{ border: '1px solid black' }} className="ph-2 mt-10" self="start" textProps={{className:'c-dark'}}>BUY NOW <Icon className="ml-3 c-dark" name="chevron-right" /></Button>
+				<Button onClick={buyProduct} style={{ border: '1px solid black' }} className="ph-2 mt-10" self="start" textProps={{ className: 'c-dark' }}>BUY NOW <Icon className="ml-3 c-dark" name="chevron-right" /></Button>
 				<Text className="mt-5">We will redirect your purchase through our marketplace</Text>
 			</View>
 		</Wrapper>
