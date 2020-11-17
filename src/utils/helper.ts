@@ -9,10 +9,10 @@ export const convertPath = (str: string): string => str.replace(/\$FILE_PATH/g, 
 
 export const convertPrices = (str: string): string[] => str.split('|').map(prize => prize.extractNumber().convertRupiah())
 
-export const priceRange = (prices: string): string => {
+export const priceRange = (prices: string, isMobile?: boolean): string => {
 	const pricesArr = convertPrices(prices)
 	const range = pricesArr.filter((_, i) => i === 0 || i === pricesArr.length - 1).join(' - ')
-	return range
+	return isMobile ? pricesArr.length > 0 ? pricesArr[0] : '' : range
 }
 
 export const replaceSpaces = (str: string): string => str.replace(/\s/g, '-')

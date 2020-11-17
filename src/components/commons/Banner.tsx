@@ -43,13 +43,13 @@ const Banner = () => {
 		>{
 				banners.reverse().rMap(({ image, btnText, redirect = "" }) => {
 					return <View className="relative w-full">
-						{redirect !== '' && <Button onClick={() => {
+						{redirect !== '' && <Button replaceClass={isMobile} onClick={() => {
 							if (redirect.validURL()) {
 								redirect.openUrl()
 							} else {
 								history.push(redirect)
 							}
-						}} self="center" className="b-10 b-light-1 bg-light absolute">
+						}} self="center" className={`${isMobile ? 'b-2 ph-3 pv-1' : 'b-10'} b-light-1 bg-light absolute`}>
 							<Text className="c-dark">{btnText}</Text>
 							<Icon className="ml-5 c-dark" name="chevron-right" />
 						</Button>}

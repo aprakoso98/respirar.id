@@ -26,7 +26,7 @@ const Home = () => {
 		<View className={`${isMobile ? 'pb-5 ph-5' : 'pb-10 ph-15'}`}>
 			<Wrapper wrap={isMobile} justify="center" className="-m-1">
 				{products.rMap((product) => {
-					return <HomeCard className="m-1 bg-blue" {...product} />
+					return <HomeCard {...product} />
 				})}
 			</Wrapper>
 		</View>

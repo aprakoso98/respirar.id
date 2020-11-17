@@ -1,3 +1,6 @@
+*, ::after, ::before {
+  // text-align: justify;
+}
 ul, ol {
   list-style: revert;
   // margin: 0;
@@ -8,12 +11,19 @@ ul, ol {
 	cursor: pointer;
 }
 .title {
+  $size: $base * 2;
   color: $blue !important;
-  font-size: $base * 2 !important;
+  font-size: $size !important;
+  // line-height: $size * .8;
   font-family: Display-Medium !important;
   margin-bottom: $secondary;    
   @media only screen and (min-width: 720px) {
     margin-bottom: $base;
+  }
+  @media only screen and (max-width: 720px) {
+    $size: $size * .5;
+    font-size: $size !important;
+    // line-height: $size * .8;
   }
 }
 .shadow {

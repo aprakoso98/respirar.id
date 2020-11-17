@@ -12,9 +12,9 @@ const AboutList = ({ list = [] }): JSX.Element => {
 	return <>
 		{list.rMap((about: { image: string, description: string, headline: string }, i: number) => {
 			const isOdd = i % 2 !== 0
-			return <Wrapper className={`${isMobile ? 'ph-5 pv-5' : 'mh-15 mv-10'}`} direction={isMobile ? 'col-reverse' : isOdd ? 'row-reverse' : 'row'}>
-				<View className={`${isMobile ? '' : `w-2/3 ${isOdd ? 'ph-5' : 'pr-5'}`}`}>
-					<Text className={`title ${isMobile ? '' : 'w-2/5'}`}>{about.headline}</Text>
+			return <Wrapper className={`${isMobile ? '' : 'mh-15 mv-10'}`} direction={isMobile ? 'col' : isOdd ? 'row-reverse' : 'row'}>
+				<View className={`${isMobile ? 'ph-5 pv-5' : `w-3/4 pv-5 ${isOdd ? 'ph-5' : 'pr-5'}`}`}>
+					<Text className={`title mb-5 ${isMobile ? '' : 'w-2/5'}`}>{about.headline}</Text>
 					{HtmlParser(about.description)}
 				</View>
 				<View self="end" className={`${isMobile ? '' : `w-1/4 ${isOdd ? 'pr-5' : 'pl-5'}`}`}>

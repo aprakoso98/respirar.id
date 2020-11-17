@@ -41,15 +41,14 @@ const About = () => {
 	useEffect(effect, [])
 	return <Container id="about">
 		<Divider />
-		<BreadCrumb className={`${isMobile ? 'ph-5' : 'ph-15'} mt-5 mb-10`} links={[{ name: 'About us' }]} />
+		<BreadCrumb className={`${isMobile ? 'ph-5 mv-3' : 'ph-15 mt-5 mb-10'}`} links={[{ name: 'About us' }]} />
 		<Text className={`${isMobile ? 'ph-5' : 'ph-15'} title`}>About Us</Text>
 		<Wrapper direction={isMobile ? 'col' : 'row'} className={`${isMobile ? 'ph-5 pv-5' : 'ph-15 pv-10'}`} items="start">
-			{isMobile && <Text align="center" justify="center" className="title">{Content.aboutTitle}</Text>}
-			<View className={`${isMobile ? 'mb-2' : 'w-1/3'}`}>
+			<View className={`${isMobile ? 'mb-2' : 'w-1/4'}`}>
 				<Content.aboutImage />
 			</View>
-			<View className={`${isMobile ? '' : 'ml-10 mr-5 w-2/3'}`}>
-				{!isMobile && <Text className="title">Respirar Breathe</Text>}
+			<View className={`${isMobile ? '' : 'ml-10 mr-5 w-3/4'}`}>
+				<Text className={`title ${isMobile ? 'mv-5' : 'mb-5'}`}>{Content.aboutTitle}</Text>
 				<Wrapper items="start">
 					<View className="w-2/3">{Content.aboutDescription}</View>
 					<View className="ml-5 w-1/3">
@@ -68,14 +67,14 @@ const About = () => {
 			</View>
 		</Wrapper>
 		<View className={`${isMobile ? 'ph-5 pv-5' : 'ph-15 pv-10'}`}>
-			<Text justify="center" align="center" className={`title ${isMobile ? '' : 'mb-10'}`}>Why shop with us</Text>
-			<Wrapper direction={isMobile ? 'col' : 'row'} justify="center" wrap className="-m-2">
-				{Content.aboutWhyShop.rMap(({ icon, title, description }) => <View className={`p-2 ${isMobile ? '' : 'w-1/3'}`}>
-					<View className="bg-light ph-5 pt-10 pb-5 card-excellence" items="center">
+			<Text justify="center" align="center" className={`title ${isMobile ? 'mb-5' : 'mb-10'}`}>Why shop with us</Text>
+			<Wrapper direction={isMobile ? 'row' : 'row'} justify="center" wrap className="-m-2">
+				{Content.aboutWhyShop.rMap(({ icon, title, description }) => <View className={`p-2 ${isMobile ? 'w-1/2' : 'w-1/3'}`}>
+					<View className={`bg-light ${isMobile ? 'ph-1 pt-5' : 'ph-5 pt-10 pb-5'} card-excellence`} items="center">
 						{/* <Icon className="f-20 c-blue" name={icon} /> */}
-						<Image className="w-1/4" source={FILE_PATH + icon} />
+						<Image className={isMobile ? 'w-1/2' : 'w-1/6'} source={FILE_PATH + icon} />
 						{/* @ts-ignore */}
-						<Text align="center" style={{ minHeight: 72, maxHeight: 72 }} className={`f-10 mh-5 mt-5 title`}>{title}</Text>
+						<Text align="center" style={{ minHeight: 50, maxHeight: 50 }} className={`${isMobile ? 'f-0' : 'f-5 mh-5'} mt-5 title`}>{title}</Text>
 						{/* <Text align="center">{description}</Text> */}
 					</View>
 				</View>)}

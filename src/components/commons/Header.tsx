@@ -91,7 +91,7 @@ const Header = () => {
 
 	return <Container className={`${isMobile ? 'ph-5 pv-5' : 'pv-5 ph-15'}`} id="header">
 		<Wrapper direction>
-			<View items="start" className={`${isMobile ? 'w-1/2' : 'w-1/5'}`}>
+			<View items="start" onClick={() => history.push('/')} className={`pointer ${isMobile ? 'w-1/3' : 'w-1/6'}`}>
 				<state.Logo />
 			</View>
 			{isMobile ? <Icon onClick={() => setState({ menuVisible: !state.menuVisible })} name="bars" /> : <>

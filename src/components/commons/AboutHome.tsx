@@ -27,19 +27,20 @@ const AboutHome = () => {
 	useEffect(() => {
 		getData()
 	}, [])
-	return <Wrapper direction={isMobile ? 'col-reverse' : 'row'} className={`bg-grey ${isMobile ? 'pv-5 ph-5' : 'pl-25'}`} id="about">
-		<View className={`${isMobile ? '' : 'w-1/2'}`}>
-			{!isMobile && <Text className="title">About Respirar</Text>}
-			<Text className="mr-5 mb-5 sub-title">{About.description}</Text>
-			<Button className="b-1 bg-transparent" onClick={() => history.push('/about')} self="start">
-				<Text className="mr-5 c-dark">Learn more</Text>
-				<Icon name="chevron-right" className="c-dark" />
-			</Button>
+	return <Wrapper direction={isMobile ? 'col-reverse' : 'row'} className={`bg-grey`} id="about">
+		<View className={`relative ${isMobile ? 'pt-5 pb-25 ph-5' : 'pl-25'}`}>
+			<View style={{ zIndex: 99 }} className={`${isMobile ? '' : 'w-1/2'}`}>
+				<Text className="title">About Respirar</Text>
+				<Text className="mr-5 mb-5 sub-title">{About.description}</Text>
+				<Button className="b-1 bg-transparent" onClick={() => history.push('/about')} self="start">
+					<Text className="mr-5 c-dark">Learn more</Text>
+					<Icon name="chevron-right" className="c-dark" />
+				</Button>
+			</View>
+			<View className={`${isMobile ? 'absolute r-0 b-0 w-2/3' : '-mt-10 w-1/2'}`}>
+				<Image source={FILE_PATH + About.image} />
+			</View>
 		</View>
-		<View className={`${isMobile ? '' : '-mt-10 w-1/2'}`}>
-			<Image source={FILE_PATH + About.image} />
-		</View>
-		{isMobile && <Text className="title">About Respirar</Text>}
 	</Wrapper>
 }
 

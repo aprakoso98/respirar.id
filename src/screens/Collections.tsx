@@ -37,7 +37,7 @@ const Collections = (screen: screenProps): JSX.Element => {
 	}
 	useEffect(effect, [params])
 	return <Container className={`${isMobile ? 'ph-5 mb-5' : 'ph-15 mb-10'}`}>
-		<BreadCrumb self="center" className={`mt-5 mb-10`} links={[{ name: 'Collections' }]} />
+		<BreadCrumb self="center" className={`mt-5 ${isMobile ? 'mb-5' : 'mb-10'}`} links={[{ name: 'Collections' }]} />
 		{/* <Text className="title">Collections</Text> */}
 		{/* @ts-ignore */}
 		{params.search && <Text>Search result for : <Text className="ml-1 !Italic">{params.search}</Text></Text>}
@@ -45,7 +45,7 @@ const Collections = (screen: screenProps): JSX.Element => {
 			const collections = Categories[key]
 			return <>
 				<Text className="c-blue title" self="center">{key}</Text>
-				<View justify="between" wrap direction={isMobile ? 'col' : 'row'} className={`${isMobile ? '' : 'pl-25 pr-25'}`}>
+				<View justify="between" wrap direction={isMobile ? 'row' : 'row'} className={`${isMobile ? '' : 'pl-25 pr-25'}`}>
 					{collections.rMap((product) => <ProductView isMobile={isMobile} {...product} />)}
 				</View>
 			</>
@@ -63,15 +63,15 @@ const ProductView = ({ isMobile, image2, image, productName, productUrl, shortDe
 		MozBoxShadow: '0px 7px 23px 3px rgba(0,0,0,0.27)',
 		boxShadow: '0px 7px 23px 3px rgba(0,0,0,0.27)'
 	}
-	return <View onClick={() => history.push(productUrl)} style={{transition:'.5s',...hover ? shadow : {}}} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} className={`p-2 mb-5 pointer ${isMobile ? '' : 'w-2/5'}`}>
+	return <View onClick={() => history.push(productUrl)} style={{ transition: '.5s', ...hover ? shadow : {} }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} className={`p-2 mb-5 pointer ${isMobile ? 'w-1/2' : 'w-2/5'}`}>
 		<View className="relative">
-			<Image className="w-full" source={FILE_PATH + (hover ? image : image2)} />
-			{hover && <Button textProps={{ className: 'c-light' }} style={{ bottom: 0 }} className="w-full absolute bg-blue-tr c-light">SHOP NOW</Button>}
+			<Image className="w-full" source={FILE_PATH + (hover ? image2 : image)} />
+			{(hover || isMobile) && <Button textProps={{ className: 'c-light' }} style={{ bottom: 0 }} className="w-full absolute bg-blue-tr c-light">SHOP NOW</Button>}
 		</View>
 		<View className="pv-2">
 			<Text className="f-5 c-dark">{productName}</Text>
 			{/* <Text>{shortDescription}</Text> */}
-			<Text className="c-blue">{priceRange(prices)}</Text>
+			<Text className="c-blue">{priceRange(prices, isMobile)}</Text>
 		</View>
 		{/* <Divider /> */}
 	</View>
