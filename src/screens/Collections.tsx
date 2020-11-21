@@ -63,7 +63,8 @@ const ProductView = ({ isMobile, image2, image, productName, productUrl, shortDe
 	}
 	return <View onClick={() => history.push(productUrl)} style={{ transition: '.5s', ...hover ? shadow : {} }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} className={`p-2 mb-5 pointer ${isMobile ? 'w-1/2' : 'w-2/5'}`}>
 		<View className="relative">
-			<Image className="w-full" source={FILE_PATH + (hover ? image2 : image)} />
+			<Image className="w-full" style={{ opacity: hover ? 0 : 1, transition: '.5s' }} source={FILE_PATH + image} />
+			<Image className="absolute w-full" style={{ opacity: hover ? 1 : 0, transition: '.5s' }} source={FILE_PATH + image2} />
 			{(hover || isMobile) && <Button textProps={{ className: 'c-light' }} style={{ bottom: 0 }} className="w-full absolute bg-blue-tr c-light">SHOP NOW</Button>}
 		</View>
 		<View className="pv-2">

@@ -49,7 +49,7 @@ export const parseAll = (data: unknown) => {
 			case 'list':
 			case 'object':
 				// @ts-ignore 
-				ret[key] = JSON.parse(detail)
+				ret[key] = JSON.parse(detail.replace(/\n/g, ''))
 				break
 			case 'whatsapp':
 			case 'email':
