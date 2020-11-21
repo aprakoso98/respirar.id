@@ -70,6 +70,7 @@ const Footer = () => {
 				</View>
 			</Wrapper>
 			<Wrapper className="bg-blue pv-3" justify="center">
+				<Text className="color-light mr-1">&copy;</Text>
 				<Text className="color-light">{Content.copyright}</Text>
 			</Wrapper>
 		</View>

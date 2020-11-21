@@ -28,7 +28,7 @@ const AboutHome = () => {
 		getData()
 	}, [])
 	return <Wrapper direction={isMobile ? 'col-reverse' : 'row'} className={`bg-grey`} id="about">
-		<View className={`relative ${isMobile ? 'pt-5 pb-25 ph-5' : 'pl-25'}`}>
+		<View direction={isMobile ? 'col' : 'row'} items={isMobile ? undefined : 'center'} className={`relative ${isMobile ? 'pt-5 pb-25 ph-5' : 'pl-25'}`}>
 			<View style={{ zIndex: 99 }} className={`${isMobile ? '' : 'w-1/2'}`}>
 				<Text className="title">About Respirar</Text>
 				<Text className="mr-5 mb-5 sub-title">{About.description}</Text>

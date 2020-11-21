@@ -22,13 +22,11 @@ const Collections = (screen: screenProps): JSX.Element => {
 	const [Categories, , initCategory] = useStateObject({} as Tyys)
 	const getData = async () => {
 		const { status, data } = await getProduct(params) as { status: boolean, data: collectionType[] }
-		console.log(data)
 		if (status) {
 			const w = data.reduce((ret: Tyys, obj) => {
 				ret[obj.kategori] = [...ret[obj.kategori] || [], obj]
 				return ret
 			}, {})
-			console.log(w)
 			initCategory(w)
 		}
 	}

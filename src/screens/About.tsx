@@ -70,7 +70,7 @@ const About = () => {
 			<Text justify="center" align="center" className={`title ${isMobile ? 'mb-5' : 'mb-10'}`}>Why shop with us</Text>
 			<Wrapper direction={isMobile ? 'row' : 'row'} justify="center" wrap className="-m-2">
 				{Content.aboutWhyShop.rMap(({ icon, title, description }) => <View className={`p-2 ${isMobile ? 'w-1/2' : 'w-1/3'}`}>
-					<View className={`bg-light ${isMobile ? 'ph-1 pt-5' : 'ph-5 pt-10 pb-5'} card-excellence`} items="center">
+					<View className={`bg-light text-center ${isMobile ? 'ph-1 pt-5' : 'ph-5 pt-10 pb-5'} card-excellence`} items="center">
 						{/* <Icon className="f-20 c-blue" name={icon} /> */}
 						<Image className={isMobile ? 'w-1/2' : 'w-1/6'} source={FILE_PATH + icon} />
 						{/* @ts-ignore */}
