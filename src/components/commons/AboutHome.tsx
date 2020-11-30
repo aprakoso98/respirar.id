@@ -9,8 +9,11 @@ import Image from '../elements/Image';
 import Button from '../elements/Button';
 import { FILE_PATH, getInfo } from 'src/utils/api';
 import { parseAll } from 'src/utils/helper';
+import HtmlParser from 'react-html-parser';
+import { XmlEntities } from 'html-entities';
 
 const AboutHome = () => {
+	const entities = new XmlEntities()
 	const history = useHistory()
 	const [About, setAbout] = useState({
 		description: '',
@@ -31,7 +34,8 @@ const AboutHome = () => {
 		<View direction={isMobile ? 'col' : 'row'} items={isMobile ? undefined : 'center'} className={`relative ${isMobile ? 'pt-5 pb-25 ph-5' : 'pl-25'}`}>
 			<View style={{ zIndex: 99 }} className={`${isMobile ? '' : 'w-1/2'}`}>
 				<Text className="title">About Respirar</Text>
-				<Text className="mr-5 mb-5 sub-title">{About.description}</Text>
+				<View className="mr-5 mb-5 sub-title">{HtmlParser(entities.decode(About.description))}</View>
+				{/* <Text className="mr-5 mb-5 sub-title">{About.description}</Text> */}
 				<Button className="b-1 bg-transparent" onClick={() => history.push('/about')} self="start">
 					<Text className="mr-5 c-dark">Learn more</Text>
 					<Icon name="chevron-right" className="c-dark" />
