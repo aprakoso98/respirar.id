@@ -1,16 +1,23 @@
 import React from 'react';
+import useWindowSize from 'src/hooks/useWindowSize';
 import View from './View';
 
 interface ModalProps {
 	visible: boolean
-	children?: string
+	children?: JSX.Element
+	onClick?: () => void
 }
 
-const Modal = ({ visible, children }: ModalProps): JSX.Element => {
+const Modal = ({ onClick, visible, children }: ModalProps): JSX.Element => {
+	const id = 'modal-container'
+	const [width, height] = useWindowSize()
 	return <>
 		{visible && <View
-			style={{ zIndex: 99 }}
-			className={`absolute w-full h-full bg-dark-tr`}
+			id={id}
+			// @ts-ignore
+			onClick={e => e.target.id === id ? onClick() : e.preventDefault()}
+			style={{ zIndex: 999, width, height }}
+			className={`absolute bg-dark-tr`}
 			items="center"
 			justify="center">{children}</View>}
 	</>

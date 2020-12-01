@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import HtmlParser from 'react-html-parser';
 import BreadCrumb from 'src/components/commons/BreadCrumb';
 import Container from 'src/components/elements/Container';
 import { Divider } from 'src/components/elements/Divider';
@@ -20,6 +19,7 @@ const About = () => {
 		aboutTitle: '',
 		aboutAddress: '',
 		aboutDescription: '',
+		aboutWhyShopText: '',
 		aboutWhyShop: [],
 		aboutHours: [],
 		aboutImage: () => null,
@@ -38,6 +38,7 @@ const About = () => {
 	const effect = () => {
 		getData()
 	}
+	useEffect(() => console.log(Content.aboutDescription), [Content.aboutDescription])
 	useEffect(effect, [])
 	return <Container id="about">
 		<Divider />
@@ -50,7 +51,7 @@ const About = () => {
 			<View className={`${isMobile ? '' : 'ml-10 mr-5 w-3/4'}`}>
 				<Text className={`title ${isMobile ? 'mv-5' : 'mb-5'}`}>{Content.aboutTitle}</Text>
 				<Wrapper items="start">
-					<View className="w-2/3">{HtmlParser(Content.aboutDescription)}</View>
+					<View className="w-2/3">{Content.aboutDescription}</View>
 					<View className="ml-5 w-1/3">
 						<Text unsetPropsOnChildren className="mb-1 c-dark f-1"><Icon className="mr-2 c-blue" name="home" />Our Store</Text>
 						<Text className="mb-3">{Content.aboutAddress}</Text>
@@ -67,7 +68,7 @@ const About = () => {
 			</View>
 		</Wrapper>
 		<View className={`${isMobile ? 'ph-5 pv-5' : 'ph-15 pv-10'}`}>
-			<Text justify="center" align="center" className={`title ${isMobile ? 'mb-5' : 'mb-10'}`}>Why shop with us</Text>
+			<Text justify="center" align="center" className={`title ${isMobile ? 'mb-5' : 'mb-10'}`}>{Content.aboutWhyShopText}</Text>
 			<Wrapper direction={isMobile ? 'row' : 'row'} justify="center" wrap className="-m-2">
 				{Content.aboutWhyShop.rMap(({ icon, title }) => <View className={`p-2 ${isMobile ? 'w-1/2' : 'w-1/3'}`}>
 					<View className={`bg-light text-center ${isMobile ? 'ph-1 pt-5' : 'ph-5 pt-10 pb-5'} card-excellence`} items="center">

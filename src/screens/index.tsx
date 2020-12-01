@@ -43,7 +43,9 @@ const App = (): JSX.Element => {
 		justify="between"
 		id="app"
 		style={isHome ? { background: `url('${FILE_PATH + BG}')` } : {}}>
-		<Modal visible={ModalState.visible}>{ModalState.content}</Modal>
+		<Modal onClick={ModalState.backdropClick} visible={ModalState.visible}>
+			<View className={ModalState.className}>{ModalState.content}</View>
+		</Modal>
 		<Header />
 		<View flex id="scroll">
 			<Switch>

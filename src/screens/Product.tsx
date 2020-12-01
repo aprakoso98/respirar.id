@@ -41,16 +41,19 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 	}
 	const buyProduct = async () => {
 		const listMarketplace: any[] = generateMarketplace(product.marketplaces, Marketplaces)
-		if (listMarketplace.length > 1) {
-			modal.setContent(<View className="bg-light">
+		if (listMarketplace.length > 0) {
+			modal.setBackdropClick(modal.hide).setContent(<View className="bg-light">
 				{listMarketplace.rMap(m => {
 					const url: string = m.baseUrl + m.link
-					return <Button onClick={url.openUrl}>
+					return <Button onClick={() => {
+						modal.hide()
+						url.openUrl()
+					}}>
 						<Image className="w-1/4" source={FILE_PATH + m.icon} />
 						<Text className="w-full">{m.marketplaceName}</Text>
 					</Button>
 				})}
-			</View>).show()
+			</View>).show('w-1/3')
 		} else if (listMarketplace.length === 1) {
 			const { baseUrl, link } = listMarketplace[0]
 			const url: string = baseUrl + link
@@ -69,7 +72,7 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 				{Object.keys(product).filter(k => k.includes('image')).rMap(k => {
 					return <View className="w-1/2 p-1">
 						{/* @ts-ignore */}
-						<Image source={FILE_PATH + product[k]} />
+						<Image preview source={FILE_PATH + product[k]} />
 					</View>
 				})}
 			</View>
