@@ -14,8 +14,10 @@ const Image = ({ preview, className = "", source, ...rest }: ImageProps) => {
 	const [width, height, isMobile] = useWindowSize()
 	const maxWidth = width / (isMobile ? 1.25 : 2)
 	const maxHeight = height / 1.15
-	const longPressEvent = useLongPress(() => null, () => modal.show().setContent(<PureImage onClick={modal.hide} style={{ maxWidth, maxHeight }} source={source} />).setBackdropClick(modal.hide))
-	return <LazyLoadImage {...preview && longPressEvent} wrapperClassName={className} alt="" component-id="image" effect="blur" {...rest} src={source} />
+	const pressEvent = () => modal.show().setContent(<PureImage onClick={modal.hide} style={{ maxWidth, maxHeight }} source={source} />).setBackdropClick(modal.hide)
+	const longPressMobile = useLongPress(pressEvent)
+	const longPressWeb = useLongPress(() => null, pressEvent)
+	return <LazyLoadImage {...preview && (isMobile ? longPressMobile : longPressWeb)} wrapperClassName={className} alt="" component-id="image" effect="blur" {...rest} src={source} />
 }
 
 export const PureImage = ({ className = "", source, ...rest }: PureImageProps) => {

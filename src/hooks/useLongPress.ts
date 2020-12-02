@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from "react";
 
 const useLongPress = (
 	onLongPress: () => void,
-	onClick?: () => void,
+	onClick: () => void = () => null,
 	{ shouldPreventDefault = true, delay = 250 } = {}
 ) => {
 	const [longPressTriggered, setLongPressTriggered] = useState(false);
@@ -50,6 +50,8 @@ const useLongPress = (
 		onMouseUp: e => clear(e),
 		// @ts-ignore
 		onMouseLeave: e => clear(e, false),
+		// @ts-ignore
+		onScroll: e => clear(e, false),
 		// @ts-ignore
 		onTouchEnd: e => clear(e)
 	};

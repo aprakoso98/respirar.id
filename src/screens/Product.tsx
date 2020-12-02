@@ -78,7 +78,7 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 			</View>
 			<View className={`${isMobile ? 'mv-5' : 'ml-5 w-2/5'}`}>
 				<BreadCrumb size="3" links={[{ name: 'Collections', redirect: '/collections' }, { name: params.product }]} />
-				<Text className="title f-15">{product.productName}</Text>
+				<Text className="title mt-3 mb-2 f-15">{product.productName}</Text>
 				<Text className="f-3 mb-10">{state.prices && state.prices[state.selectedSize || 0]}</Text>
 				<Wrapper justify={isMobile ? 'between' : 'start'} className="mb-5">
 					<Wrapper className={`${isMobile ? '' : 'mr-5'}`}>
@@ -93,9 +93,9 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 				<Text className="mb-10 c-dark">{HtmlParser(product.description as string)}</Text>
 				<Wrapper justify={isMobile ? 'between' : 'start'}>
 					<Text className="mr-10">Size</Text>
-					<Wrapper justify={isMobile ? 'start' : undefined} className={`${isMobile ? 'w-1/3' : 'w-1/6'}`}>
+					<Wrapper wrap justify={isMobile ? 'start' : undefined} className={`${isMobile ? 'w-2/3' : 'w-4/6'}`}>
 						{state.sizes && state.sizes.rMap(
-							(size: string, index: number) => <Button
+							(size: string, index: number) => <Button className="bg-transparent"
 								textProps={{ style: { whiteSpace: 'nowrap' }, className: index === state.selectedSize ? 'c-dark f-2' : '' }}
 								onClick={() => setState({ selectedSize: index })}>{size}</Button>
 						)}
