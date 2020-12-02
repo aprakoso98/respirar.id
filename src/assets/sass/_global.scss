@@ -137,7 +137,7 @@ ul, ol {
 
 @mixin myMixin ($w, $s){
   $o: 0;
-  @for $i from 0 to 30 {
+  @for $i from 0 to 50 {
     $o: if($i==0, 0, if($w > 0, $o + 5, $o - 5));
     .#{$s}f-#{$i} {
       font-size: #{$i + $fontSize} !important;

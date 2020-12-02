@@ -31,9 +31,9 @@ const AboutHome = () => {
 		getData()
 	}, [])
 	return <Wrapper direction={isMobile ? 'col-reverse' : 'row'} className={`bg-grey`} id="about">
-		<View direction={isMobile ? 'col' : 'row'} items={isMobile ? undefined : 'center'} className={`relative ${isMobile ? 'pt-5 pb-25 ph-5' : 'pl-25'}`}>
+		<View direction={isMobile ? 'col' : 'row'} items={isMobile ? undefined : 'center'} className={`relative ${isMobile ? 'pt-5 pb-35 ph-5' : 'pl-25'}`}>
 			<View style={{ zIndex: 99 }} className={`${isMobile ? '' : 'w-1/2'}`}>
-				<Text className="title">About Respirar</Text>
+				<Text className="title mb-5">About Respirar</Text>
 				<View className="mr-5 mb-5 sub-title">{HtmlParser(entities.decode(About.description))}</View>
 				{/* <Text className="mr-5 mb-5 sub-title">{About.description}</Text> */}
 				<Button className="b-1 bg-transparent" onClick={() => history.push('/about')} self="start">

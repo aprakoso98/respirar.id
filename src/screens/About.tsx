@@ -51,19 +51,22 @@ const About = () => {
 			<View className={`${isMobile ? '' : 'ml-10 mr-5 w-3/4'}`}>
 				<Text className={`title ${isMobile ? 'mv-5' : 'mb-5'}`}>{Content.aboutTitle}</Text>
 				<Wrapper items="start">
-					<View className="w-2/3">{Content.aboutDescription}</View>
-					<View className="ml-5 w-1/3">
-						<Text unsetPropsOnChildren className="mb-1 c-dark f-1"><Icon className="mr-2 c-blue" name="home" />Our Store</Text>
-						<Text className="mb-3">{Content.aboutAddress}</Text>
+					<View className={`${isMobile ? 'w-full' : "w-2/3"}`}>{Content.aboutDescription}</View>
+					{!isMobile && <View className="ml-5 w-1/3">
+						<Text unsetPropsOnChildren className="c-dark mb-1 c-dark f-1">
+							<Icon className="mr-2 c-blue" name="home" />
+							<Text className="c-dark">Our Store</Text>
+						</Text>
+						<Text className="c-dark mb-3">{Content.aboutAddress}</Text>
 						{/* @ts-ignore */}
-						<Text replaceClass={isMobile}>Phone : {<Content.aboutPhone className={isMobile ? '' : 'ml-1'} />}</Text>
+						<Text><Text className="c-dark">Phone : </Text>{<Content.aboutPhone className={isMobile ? '' : 'c-dark ml-1'} />}</Text>
 						{/* @ts-ignore */}
-						<Text replaceClass={isMobile}>Email : {<Content.aboutEmail className={isMobile ? '' : 'ml-1'} />}</Text>
-						<Text unsetPropsOnChildren className="mt-5 mb-1 c-dark f-1"><Icon className="mr-2 c-blue" name="clock" />Store Hours</Text>
+						<Text><Text className="c-dark">Email : </Text>{<Content.aboutEmail className={isMobile ? '' : 'c-dark ml-1'} />}</Text>
+						<Text unsetPropsOnChildren className="c-dark mt-5 mb-1 c-dark f-1"><Icon className="mr-2 c-blue" name="clock" /><Text className="c-dark">Store Hours</Text></Text>
 						{Content.aboutHours.rMap(hours => {
-							return <Text>{hours}</Text>
+							return <Text className="c-dark">{hours}</Text>
 						})}
-					</View>
+					</View>}
 				</Wrapper>
 			</View>
 		</Wrapper>

@@ -16,7 +16,7 @@ import actionMarketplaces from '../redux/actions/marketplaces';
 import { FILE_PATH, getInfo } from 'src/utils/api';
 
 const App = (): JSX.Element => {
-	const [isHome, setIsHome] = useState(window.location.pathname === '/')
+	const [/* isHome */, setIsHome] = useState(window.location.pathname === '/')
 	const history = useHistory()
 	const dispatch = useDispatch()
 	const [BG, setBg] = useState('')
@@ -42,7 +42,8 @@ const App = (): JSX.Element => {
 		className={ModalState.visible ? 'fixed' : 'relative'}
 		justify="between"
 		id="app"
-		style={isHome ? { background: `url('${FILE_PATH + BG}')` } : {}}>
+		style={{ background: `url('${FILE_PATH + BG}')` }}>
+		{/* style={isHome ? { background: `url('${FILE_PATH + BG}')` } : {}}> */}
 		<Modal onClick={ModalState.backdropClick} visible={ModalState.visible}>
 			<View className={ModalState.className}>{ModalState.content}</View>
 		</Modal>
