@@ -45,14 +45,14 @@ const About = () => {
 		<BreadCrumb className={`${isMobile ? 'ph-5 mv-3' : 'ph-15 mt-5 mb-10'}`} links={[{ name: 'About us' }]} />
 		<Text className={`${isMobile ? 'ph-5' : 'ph-15'} title`}>About Us</Text>
 		<Wrapper direction={isMobile ? 'col' : 'row'} className={`${isMobile ? 'ph-5 pv-5' : 'ph-15 pv-10'}`} items="start">
-			<View className={`${isMobile ? 'mb-2' : 'w-1/4'}`}>
+			<View className={`${isMobile ? 'mb-2' : 'w-1/2'}`}>
 				<Content.aboutImage />
 			</View>
-			<View className={`${isMobile ? '' : 'ml-10 mr-5 w-3/4'}`}>
+			<View className={`${isMobile ? '' : 'ml-10 mrr-5 w-1/2'}`}>
 				<Text className={`title ${isMobile ? 'mv-5' : 'mb-5'}`}>{Content.aboutTitle}</Text>
 				<Wrapper items="start">
-					<View className={`${isMobile ? 'w-full' : "w-2/3"}`}>{Content.aboutDescription}</View>
-					{!isMobile && <View className="ml-5 w-1/3">
+					<View className={`${true ? 'w-full' : "w-2/3"}`}>{Content.aboutDescription}</View>
+					{false && <View className="ml-5 w-1/3">
 						<Text unsetPropsOnChildren className="c-dark mb-1 c-dark f-1">
 							<Icon className="mr-2 c-blue" name="home" />
 							<Text className="c-dark">Our Store</Text>

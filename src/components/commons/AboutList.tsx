@@ -13,11 +13,11 @@ const AboutList = ({ list = [] }): JSX.Element => {
 		{list.rMap((about: { image: string, description: string, headline: string }, i: number) => {
 			const isOdd = i % 2 !== 0
 			return <Wrapper className={`${isMobile ? '' : 'mh-15 mv-10'}`} direction={isMobile ? 'col' : isOdd ? 'row-reverse' : 'row'}>
-				<View className={`${isMobile ? 'ph-5 pv-5' : `w-3/4 pv-5 ${isOdd ? 'ph-5' : 'pr-5'}`}`}>
-					<Text className={`title mb-5 ${isMobile ? '' : 'w-2/5'}`}>{about.headline}</Text>
+				<View className={`${isMobile ? 'ph-5 pv-5' : `w-1/2 pv-5 ${isOdd ? 'ph-5' : 'pr-5'}`}`}>
+					<Text className={`title mb-5 ${isMobile ? '' : ''}`}>{about.headline}</Text>
 					{HtmlParser(about.description)}
 				</View>
-				<View self="end" className={`${isMobile ? '' : `w-1/4 ${isOdd ? 'pr-5' : 'pl-5'}`}`}>
+				<View className={`${isMobile ? '' : `w-1/2 ${isOdd ? 'pr-5' : 'pl-5'}`}`}>
 					<Image className="-mt-3" source={FILE_PATH + about.image} />
 				</View>
 			</Wrapper>

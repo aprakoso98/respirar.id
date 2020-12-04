@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import HtmlParser from 'react-html-parser';
 import { useSelector } from 'react-redux';
 import BreadCrumb from 'src/components/commons/BreadCrumb';
@@ -11,8 +11,8 @@ import View from 'src/components/elements/View';
 import Wrapper from 'src/components/elements/Wrapper';
 import { useStateObject } from 'src/hooks/useState';
 import useWindowSize from 'src/hooks/useWindowSize';
-import { FILE_PATH, getProduct } from 'src/utils/api';
-import { convertPrices, generateMarketplace } from 'src/utils/helper';
+import { FILE_PATH, getInfo, getProduct } from 'src/utils/api';
+import { convertPrices, generateMarketplace, parseAll } from 'src/utils/helper';
 import { producType, screenProps } from 'src/utils/types';
 import { modal } from '../redux/actions/modal';
 
@@ -20,6 +20,7 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 	// @ts-ignore
 	const Marketplaces = useSelector(state => state.Marketplace)
 	const [, , isMobile] = useWindowSize()
+	const [S, setS] = useState({ waNumber: () => null })
 	const [state, setState] = useStateObject<{
 		sizes?: string[],
 		prices?: string[],
@@ -27,6 +28,9 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 	}>({})
 	const [product, setProduct] = useStateObject<Partial<producType>>({})
 	const getData = async () => {
+		const respWa = await getInfo({ key: 'wa-number' })
+		// @ts-ignore
+		setS(parseAll(respWa.data))
 		const { status, data } = await getProduct<producType>({ productUrl: params.product })
 		if (status) {
 			setProduct(data)
@@ -41,7 +45,7 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 	}
 	const buyProduct = async () => {
 		const listMarketplace: any[] = generateMarketplace(product.marketplaces, Marketplaces)
-		if (listMarketplace.length > 0) {
+		if (listMarketplace.length > 1) {
 			modal.setBackdropClick(modal.hide).setContent(<View className="bg-light">
 				{listMarketplace.rMap(m => {
 					const url: string = m.baseUrl + m.link
@@ -101,7 +105,14 @@ const Product = ({ match: { params } }: screenProps): JSX.Element => {
 						)}
 					</Wrapper>
 				</Wrapper>
-				<Button onClick={buyProduct} style={{ border: '1px solid black' }} className="ph-2 mt-10" self="start" textProps={{ className: 'c-dark' }}>BUY NOW <Icon className="ml-3 c-dark" name="chevron-right" /></Button>
+				<View className="mt-10" direction="row">
+					<Button onClick={buyProduct} style={{ border: '1px solid black' }} className="bg-transparent ph-2" self="start" textProps={{ className: 'c-dark' }}>BUY NOW <Icon className="ml-3 c-dark" name="chevron-right" /></Button>
+					{/* @ts-ignore */}
+					<S.waNumber style={{ border: '1px solid black' }} className="ml-2 ph-5 pv-2 flex justify-center items-center">
+						<Icon className="c-dark mr-2" name="whatsapp" />
+						<Text className="c-dark">BUY VIA WA</Text>
+					</S.waNumber>
+				</View>
 				<Text className="mt-5">We will redirect your purchase through our marketplace</Text>
 			</View>
 		</Wrapper>
