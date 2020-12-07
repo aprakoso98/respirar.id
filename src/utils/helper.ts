@@ -9,9 +9,17 @@ export const convertPath = (str: string): string => str.replace(/\$FILE_PATH/g, 
 
 export const convertPrices = (str: string): string[] => str.split('|').map(prize => prize.extractNumber().convertRupiah())
 
+const uniq = <S>(a: S[]) => {
+	return a.sort().filter(function (item: any, pos: number, ary: any) {
+		return !pos || item !== ary[pos - 1];
+	});
+}
+
 export const priceRange = (prices: string, isMobile?: boolean): string => {
-	const pricesArr = convertPrices(prices)
+	const Arr = convertPrices(prices)
+	const pricesArr: string[] = uniq(Arr)
 	const range = pricesArr.filter((_, i) => i === 0 || i === pricesArr.length - 1).join(' - ')
+
 	return isMobile ? pricesArr.length > 0 ? pricesArr[0] : '' : range
 }
 
